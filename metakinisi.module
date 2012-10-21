@@ -46,15 +46,15 @@ function metakinisi_tracks($uid) {
   return $list;
 }
 
-function metakinisi_format_length($length) {  
+function _metakinisi_format_length($length) {  
   return sprintf( "%0.1f Km", $length);
 }
 
-function metakinisi_format_datetime($time) {  
+function _metakinisi_format_datetime($time) {  
   return date( 'd-m-Y H:i', $time);
 }
 
-function metakinisi_format_duration($seconds) {
+function _metakinisi_format_duration($seconds) {
   $minutes = $seconds / 60;
   if ( $minutes < 60 ) {
     return sprintf( "%02d'", $minutes);
@@ -65,31 +65,57 @@ function metakinisi_format_duration($seconds) {
   }
 }
 
-function metakinisi_label($label) {
-  return $label . ':';
+function _metakinisi_weekday($time) {
+  // Don't use format_date, because of timezone bug
+  // Instead do the translation ourselves.
+  static $days;
+  if ( ! $days ) {
+    $days = array(
+    t('Sunday'),
+    t('Monday'),
+    t('Tuesday'),
+    t('Wednesday'),
+    t('Thursday'),
+    t('Friday'),
+    t('Saturday'),
+    );
+  }
+  $fields = getdate($time);
+  return $days[$fields['wday']];
 }
 
-function metakinisi_computed_values($t) {
+function _metakinisi_computed_headers() {
+  return array( t('Date'), t('Weekday'), t('Start'), t('Duration'), t('Length'));  
+}
+
+function _metakinisi_computed_values($t) {
     $date = t('Not computed yet');
+    $time = '';
+    $weekday = '';
     $duration = '';
     $length = '';
     if ( $t && $t->track_start != 0 ) {
-      $date = metakinisi_format_datetime($t->track_start);
-      $duration = metakinisi_format_duration($t->track_end - $t->track_start);
-      $length = metakinisi_format_length($t->track_length);
+      $date = date( 'd-m-Y', $t->track_start);
+      $time = date( 'H:i', $t->track_start);
+      $weekday = _metakinisi_weekday($t->track_start);
+      $duration = _metakinisi_format_duration($t->track_end - $t->track_start);
+      $length = _metakinisi_format_length($t->track_length);
     }
-    return array($date, $duration, $length);
+    return array($date, $weekday, $time, $duration, $length);
 }
+
+function _metakinisi_row($label, $value) {
+  return array($label . ':', $value);
+}
+/**
+ * Implementation of hook_node_view
+ */
 function metakinisi_node_view($node, $view_mode, $langcode) {
   if ( $node->type == 'track' ) {    
     $t = metakinisi_track($node);
-  list($date, $duration, $length) = metakinisi_computed_values($t);
-  $rows = array(
-      array( metakinisi_label( t('Start Time')), $date),
-      array( metakinisi_label( t('Duration')), $duration),
-      array( metakinisi_label( t('Length')), $length),
-  );
-  $value = theme('table', array( 'rows' => $rows));
+    $rows = array_map( '_metakinisi_row',
+            _metakinisi_computed_headers(), _metakinisi_computed_values($t));
+    $value = theme('table', array( 'rows' => $rows));
     $node->content['track_summary'] = array(
       //'#markup' => theme('table', array( 'rows' => $rows)),
       '#markup' => $value,
@@ -99,14 +125,26 @@ function metakinisi_node_view($node, $view_mode, $langcode) {
   }
 }
 
+/**
+ * Implementation of hook_node_update
+ */
+function metakinisi_node_update($node) {
+  if ($node->type == 'track' ) {
+    $q = db_delete('metakinisi_track');
+    $q->condition( 'nid', $node->nid );
+    $q->execute();
+  }
+}
+
 function metakinisi_trips() {
   global $user;  
-  $headers = array( t('Trip'), t('Line'), t('Start Time'), t('Duration'), t('Length'));
+  $headers = array( t('Trip'), t('Line'));
+  $headers = array_merge($headers, _metakinisi_computed_headers());
   $rows = array();
   $tracks = metakinisi_tracks($user->uid);
   foreach($tracks as $t) {
     $row = array(l($t->title, "node/$t->nid"), $t->label);            
-    $row = array_merge( $row, metakinisi_computed_values($t));
+    $row = array_merge( $row, _metakinisi_computed_values($t));
     $rows[] = $row;
   }
   return theme('table', array( 'header' => $headers, 'rows' => $rows));
