@@ -1,0 +1,107 @@
+<?php
+
+/**
+ * Implementation of hook_menu
+ */
+function metakinisi_menu() {
+  $items = array();
+  $items['metakinisi/trips'] = array(
+      'title' => 'Trips',
+      'page callback' => 'metakinisi_trips',
+      'page arguments' => array(),
+      'access arguments' => array('access content'),
+      'description' => 'My Trips',
+      'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+function metakinisi_track($node) {
+  $q = db_select('metakinisi_track', 'm');
+  $q->fields('m');
+  $q->condition( 'nid', $node->nid, "=");
+  foreach ($q->execute() as $t) {
+    return $t;
+  }
+  return NULL;
+}
+
+function metakinisi_tracks($uid) {
+  $sql = "SELECT node.nid, node.title, field_label_value AS label, track_start, track_end, track_length" .
+          " FROM {node} AS node" .
+          " LEFT JOIN {metakinisi_track} AS track ON node.nid = track.nid" .
+          " LEFT JOIN {field_data_field_route} AS field" .
+          " ON field.revision_id = node.vid AND field.entity_type = 'node'" .
+          " LEFT JOIN {node} AS route ON route.nid = field_route_target_id" .
+          " JOIN {field_data_field_label} AS label" .
+          " ON label.revision_id = route.vid AND label.entity_type = 'node'" .
+          " WHERE node.uid = $uid" .
+          " ORDER BY track_start DESC";
+  $q = db_query($sql);
+  $list = array();
+  Log::info('result', $q);
+  foreach ($q as $t) {
+    $list[] = $t;    
+  }
+  return $list;
+}
+
+function metakinisi_format_length($length) {  
+  return sprintf( "%0.1f Km", $length);
+}
+
+function metakinisi_format_datetime($time) {  
+  return date( 'd-m-Y H:i', $time);
+}
+
+function metakinisi_format_duration($seconds) {
+  $minutes = $seconds / 60;
+  if ( $minutes < 60 ) {
+    return sprintf( "%02d'", $minutes);
+  } else {
+    $hours = $minutes / 60;
+    $minutes = $minutes % 60;
+    return sprintf( "%d:%02d", $hours, $minutes );
+  }
+}
+
+function metakinisi_label($label) {
+  return $label . ':';
+}
+function metakinisi_node_view($node, $view_mode, $langcode) {
+  if ( $node->type == 'track' ) {    
+    $t = metakinisi_track($node);
+    if ( $t ) {
+      $rows = array(
+          array( metakinisi_label( t('Start Time')), metakinisi_format_datetime($t->track_start)),
+          array( metakinisi_label( t('Duration')), metakinisi_format_duration($t->track_end - $t->track_start)),
+          array( metakinisi_label( t('Length')), metakinisi_format_length($t->track_length)),
+      );
+      $value = theme('table', array( 'rows' => $rows));
+      $node->content['track_summary'] = array(
+        //'#markup' => theme('table', array( 'rows' => $rows)),
+        '#markup' => $value,
+        '#weight' => 10,
+        //'#theme' => 'mymodule_my_additional_field',
+      );
+    }
+  }
+}
+
+function metakinisi_trips() {
+  global $user;  
+  $headers = array( t('Trip'), t('Line'), t('Start Time'), t('Duration'), t('Length'));
+  $rows = array();
+  $tracks = metakinisi_tracks($user->uid);
+  foreach($tracks as $t) {
+    $rows[] = array(
+        l($t->title, "node/$t->nid"),
+        $t->label,
+        metakinisi_format_datetime($t->track_start),
+        metakinisi_format_duration($t->track_end - $t->track_start),
+        metakinisi_format_length($t->track_length),
+    );
+  }
+  return theme('table', array( 'header' => $headers, 'rows' => $rows));
+  
+}

@@ -1,0 +1,115 @@
+<?php
+
+function metakinisi_schema() {
+  $schema['metakinisi_track'] = array(
+    'description' => t('Stores (gpx) track entries'),
+    'fields' => array(
+      'tid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => t('Track Id.'),
+      ),
+      'nid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t('Node Id.'),
+      ),
+      'route_id' => array(
+        'type' => 'int',
+        'not null' => FALSE,
+        'description' => t('Route Node Id.'),
+      ),
+      'fid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t('File Id.'),
+      ),
+      'track_start' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t('Start timestamp.'),
+      ),
+      'track_end' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t('End timestamp.'),
+      ),
+      'track_length' => array(
+        'type' => 'float',
+        'size' => 'medium',
+        'default' => 0,
+        'not null' => FALSE,
+        'description' => t('Track length (km).'),
+      ),
+     ),
+    'primary key' => array('tid'),
+    'indexes' => array(
+    	'metakinisi_track_nid_idx' => array('nid'),
+     ),
+   );
+  $schema['metakinisi_marker'] = array(
+    'description' => t('Stores markers (bus stops) independently of routes'),
+    'fields' => array(
+      'mid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => t('Marker Id.'),
+      ),
+      'symbol' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => t("The marker symbol."),
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => t("The marker name."),
+      ),
+      'lat' => array(
+        'type' => 'float',
+        'not null' => TRUE,
+        'description' => t('Latitude.'),
+      ),
+      'lon' => array(
+        'type' => 'float',
+        'not null' => TRUE,
+        'description' => t('Longitude.'),
+      ),
+        ),
+    'primary key' => array('mid'),      
+   );
+  $schema['metakinisi_stop'] = array(
+    'description' => t('Stores route stops:  sequences of markers for each route'),
+    'fields' => array(
+      'sid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => t('Stop Id.'),
+      ),
+      'rid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t("The route node id."),
+      ),
+      'mid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t("The marker id."),
+      ),
+      'seq' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t("The sequence #."),
+      ),
+     ),
+    'primary key' => array('sid'),      
+    'indexes' => array(
+    	'metakinisi_stop_rid_idx' => array('rid'),
+     ),
+   );
+   return $schema;
+}

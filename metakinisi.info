@@ -1,0 +1,5 @@
+name = Metakinisi
+description = Maintains and displays track metadata
+package = melato.org
+core = 7.x
+files[] = metakinisi.module
