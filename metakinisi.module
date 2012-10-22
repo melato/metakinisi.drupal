@@ -13,6 +13,14 @@ function metakinisi_menu() {
       'description' => 'My Trips',
       'type' => MENU_NORMAL_ITEM,
   );
+  $items['metakinisi/map/%node'] = array(
+      'title' => 'Map',
+      'page callback' => 'metakinisi_map',
+      'page arguments' => array(2),
+      'access arguments' => array('access content'),
+      'description' => 'Trip Map',
+      'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -122,6 +130,13 @@ function metakinisi_node_view($node, $view_mode, $langcode) {
       '#weight' => 10,
       //'#theme' => 'mymodule_my_additional_field',
     );
+    if ( $t ) {
+      $node->content['map'] = array(
+        '#markup' => l(t('map'), "metakinisi/map/$node->nid"),
+        '#weight' => 11,
+        //'#theme' => 'mymodule_my_additional_field',
+      );
+    }
   }
 }
 
@@ -149,4 +164,45 @@ function metakinisi_trips() {
   }
   return theme('table', array( 'header' => $headers, 'rows' => $rows));
   
+}
+
+/**
+ * See Drupal file_transfer (file.inc)
+ * @param type $node
+ * @param type $file 
+ */
+function metakinisi_map_transfer($node, $file) {
+  if (ob_get_level()) {
+    ob_end_clean();
+  }  
+  $headers = array(
+    'Content-Type' => 'text/html; charset=utf-8',
+    'Content-Length' => filesize($file),
+  );
+  foreach ($headers as $name => $value) {
+    drupal_add_http_header($name, $value);
+  }
+  drupal_send_headers();
+  
+  $fd = fopen($file, 'rb');
+  if ( $fd ) {
+    while (!feof($fd)) {
+      print fread($fd, 1024);
+    }
+    fclose($fd);
+  }
+}
+
+function metakinisi_map($node) {
+  global $user;
+  if ( $user && $user->uid == $node->uid ) {
+    $map_dir = '/var/opt/data/metakinisi.maps';
+    $file = "$map_dir/$node->nid.html";
+    if ( file_exists($file)) {
+      metakinisi_map_transfer($node, $file);
+    } else {
+      return t('Map is not available');
+    }
+  }
+  drupal_access_denied();
 }
