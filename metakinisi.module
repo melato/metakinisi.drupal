@@ -25,17 +25,22 @@ function metakinisi_menu() {
 }
 
 function metakinisi_track($node) {
-  $q = db_select('metakinisi_track', 'm');
-  $q->fields('m');
-  $q->condition( 'nid', $node->nid, "=");
-  foreach ($q->execute() as $t) {
+  $sql = "SELECT node.nid, node.title," .
+          " m.status, track_start, track_end, track_length" .
+          " FROM {metakinisi_track} AS m" .
+          " LEFT JOIN {node} AS node ON m.route_id = node.nid" .
+          " WHERE m.nid = ?";
+
+  $q = db_query($sql, array($node->nid));
+  foreach ($q as $t) {
     return $t;
   }
   return NULL;
 }
 
 function metakinisi_tracks($uid) {
-  $sql = "SELECT node.nid, node.title, field_label_value AS label, track_start, track_end, track_length" .
+  $sql = "SELECT node.nid, node.title, field_label_value AS label," .
+          " track.status, track_start, track_end, track_length" .
           " FROM {node} AS node" .
           " LEFT JOIN {field_data_field_route} AS field" .
           " ON field.revision_id = node.vid AND field.entity_type = 'node'" .
@@ -123,6 +128,9 @@ function metakinisi_node_view($node, $view_mode, $langcode) {
     $t = metakinisi_track($node);
     $rows = array_map( '_metakinisi_row',
             _metakinisi_computed_headers(), _metakinisi_computed_values($t));
+    if ( $t ) {
+      $rows[] = _metakinisi_row( t('Detected Route'), $t->title );
+    }
     $value = theme('table', array( 'rows' => $rows));
     $node->content['track_summary'] = array(
       //'#markup' => theme('table', array( 'rows' => $rows)),
@@ -133,7 +141,7 @@ function metakinisi_node_view($node, $view_mode, $langcode) {
     if ( $t ) {
       $node->content['map'] = array(
         '#markup' => l(t('map'), "metakinisi/map/$node->nid"),
-        '#weight' => 11,
+        '#weight' => 12,
         //'#theme' => 'mymodule_my_additional_field',
       );
     }

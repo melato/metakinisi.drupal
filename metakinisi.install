@@ -14,15 +14,20 @@ function metakinisi_schema() {
         'not null' => TRUE,
         'description' => t('Node Id.'),
       ),
-      'route_id' => array(
-        'type' => 'int',
-        'not null' => FALSE,
-        'description' => t('Route Node Id.'),
-      ),
       'fid' => array(
         'type' => 'int',
         'not null' => TRUE,
         'description' => t('File Id.'),
+      ),
+      'status' => array(
+        'type' => 'int',
+        'not null' => FALSE,
+        'description' => t('Parsing Status.'),
+      ),
+      'route_id' => array(
+        'type' => 'int',
+        'not null' => FALSE,
+        'description' => t('Route Node Id.'),
       ),
       'track_start' => array(
         'type' => 'int',
