@@ -21,6 +21,15 @@ function metakinisi_menu() {
       'description' => 'Trip Map',
       'type' => MENU_CALLBACK,
   );
+  $items['admin/config/metakinisi'] = array(
+    'title' => 'Metakinisi',
+    'description' => 'Configure Settings for Metakinisi.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('metakinisi_admin_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'metakinisi.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );  
   return $items;
 }
 
@@ -204,13 +213,14 @@ function metakinisi_map_transfer($node, $file) {
 function metakinisi_map($node) {
   global $user;
   if ( $user && $user->uid == $node->uid ) {
-    $map_dir = '/var/opt/data/metakinisi.maps';
-    $file = "$map_dir/$node->nid.html";
-    if ( file_exists($file)) {
-      metakinisi_map_transfer($node, $file);
-    } else {
-      return t('Map is not available');
+    $map_dir = variable_get('metakinisi_map_dir', '/var/opt/metakinisi/maps');
+    if ( $map_dir ) {
+      $file = "$map_dir/$node->nid.html";
+      if ( file_exists($file)) {
+        metakinisi_map_transfer($node, $file);
+      }
     }
+    return t('Map is not available');
   }
   drupal_access_denied();
 }
