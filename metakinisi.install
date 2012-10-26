@@ -34,17 +34,17 @@ function metakinisi_schema() {
         'not null' => TRUE,
         'description' => t('Start timestamp.'),
       ),
-      'track_end' => array(
-        'type' => 'int',
-        'not null' => TRUE,
-        'description' => t('End timestamp.'),
-      ),
       'track_length' => array(
         'type' => 'float',
         'size' => 'medium',
         'default' => 0,
         'not null' => FALSE,
         'description' => t('Track length (km).'),
+      ),
+      'track_duration' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t('Duration (s).'),
       ),
      ),
     'primary key' => array('tid'),

@@ -35,7 +35,7 @@ function metakinisi_menu() {
 
 function metakinisi_track($node) {
   $sql = "SELECT node.nid, node.title," .
-          " m.status, track_start, track_end, track_length" .
+          " m.status, track_start, track_duration, track_length" .
           " FROM {metakinisi_track} AS m" .
           " LEFT JOIN {node} AS node ON m.route_id = node.nid" .
           " WHERE m.nid = ?";
@@ -65,8 +65,9 @@ function metakinisi_passes($node) {
 }
 
 function metakinisi_tracks($uid) {
-  $sql = "SELECT node.nid, node.title, field_label_value AS label," .
-          " track.status, track_start, track_end, track_length" .
+  $sql = "SELECT node.nid, node.title," .
+          " field_route_target_id AS field_route, track.route_id, field_label_value AS label," .
+          " track.status, track_start, track_duration, track_length" .
           " FROM {node} AS node" .
           " LEFT JOIN {field_data_field_route} AS field" .
           " ON field.revision_id = node.vid AND field.entity_type = 'node'" .
@@ -86,7 +87,7 @@ function metakinisi_tracks($uid) {
 }
 
 function _metakinisi_format_length($length) {  
-  return sprintf( "%0.1f Km", $length);
+  return sprintf( "%0.1f Km", $length / 1000.0);
 }
 
 function _metakinisi_format_datetime($time) {  
@@ -102,6 +103,12 @@ function _metakinisi_format_duration($seconds) {
     $minutes = $minutes % 60;
     return sprintf( "%d:%02d", $hours, $minutes );
   }
+}
+
+function _metakinisi_format_speed($distance, $time) {
+  if ( $time == 0 )
+    return '';
+  return sprintf( "%0.0f", $distance / $time * 3600.0 / 1000.0);
 }
 
 function _metakinisi_weekday($time) {
@@ -124,7 +131,7 @@ function _metakinisi_weekday($time) {
 }
 
 function _metakinisi_computed_headers() {
-  return array( t('Date'), t('Weekday'), t('Start'), t('Duration'), t('Length'));  
+  return array( t('Date'), t('Weekday'), t('Start'), t('Duration'), t('Length'), t('Speed (Km/h)'));  
 }
 
 function _metakinisi_computed_values($t) {
@@ -137,10 +144,11 @@ function _metakinisi_computed_values($t) {
       $date = date( 'd-m-Y', $t->track_start);
       $time = date( 'H:i', $t->track_start);
       $weekday = _metakinisi_weekday($t->track_start);
-      $duration = _metakinisi_format_duration($t->track_end - $t->track_start);
+      $duration = _metakinisi_format_duration($t->track_duration);
       $length = _metakinisi_format_length($t->track_length);
+      $speed = _metakinisi_format_length($t->track_length, $t->track_duration);
     }
-    return array($date, $weekday, $time, $duration, $length);
+    return array($date, $weekday, $time, $duration, $length, $speed);
 }
 
 function _metakinisi_row($label, $value) {
@@ -174,23 +182,27 @@ function metakinisi_node_view($node, $view_mode, $langcode) {
     if ( $t ) {
       $passes = metakinisi_passes($node);
       $rows = array();
-      $headers = array( '', t('Stop'), t('Distance'), t('Time'), t('Speed'));
+      $headers = array( '', t('Stop'), t('Distance'), t('Time'), t('Speed (Km/h)'));
       $time0 = NULL;
+      $last_distance = 0;
+      $last_time = 0;
       foreach( $passes as $pass ) {
         if ( ! $time0 ) {
           $time0 = $pass->time;
         }
-        $time = $pass->time - $time0;
-        $speed = 0;
-        if ( $time ) {
-          $speed = $pass->distance / $time * 3600 / 1000;
+        $time = $pass->time - $last_time;
+        $distance = $pass->distance - $last_distance;
+        if ( ! $last_time ) {
+          $time = 0;
         }
 
         $rows[] = array( $pass->seq, $pass->name,
             _metakinisi_format_length($pass->distance),
-            _metakinisi_format_duration($time),
-            sprintf( "%0.0f Km/h", $speed),
+            _metakinisi_format_duration($pass->time - $time0),
+            _metakinisi_format_speed($distance, $time),
             );
+        $last_distance = $pass->distance;
+        $last_time = $pass->time;
       }
       $node->content['passes'] = array(
         '#markup' => theme('table', array( 'rows' => $rows, 'header' => $headers)),
@@ -221,7 +233,11 @@ function metakinisi_trips() {
   $rows = array();
   $tracks = metakinisi_tracks($user->uid);
   foreach($tracks as $t) {
-    $row = array(l($t->title, "node/$t->nid"), $t->label);            
+    $label = $t->label;
+    if ( $t->route_id != $t->field_route) {
+      $label = $t->label . " ?";
+    }
+    $row = array(l($t->title, "node/$t->nid"), $label);            
     $row = array_merge( $row, _metakinisi_computed_values($t));
     $rows[] = $row;
   }
