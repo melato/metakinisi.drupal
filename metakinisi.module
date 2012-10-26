@@ -47,6 +47,23 @@ function metakinisi_track($node) {
   return NULL;
 }
 
+function metakinisi_passes($node) {
+  $sql = "SELECT stop.seq, marker.name, pass_time AS time" .
+          " FROM {metakinisi_pass} AS pass" .
+          " JOIN {metakinisi_stop} AS stop ON pass.sid = stop.sid" .
+          " JOIN {metakinisi_marker} AS marker ON marker.mid = stop.mid" .
+          " JOIN {metakinisi_track} AS track ON track.tid = pass.tid" .
+          " WHERE track.nid = ?" .
+          " ORDER BY stop.seq ASC";
+
+  $q = db_query($sql, array($node->nid));
+  $list = array();
+  foreach ($q as $t) {
+    $list[] = $t;
+  }
+  return $list;
+}
+
 function metakinisi_tracks($uid) {
   $sql = "SELECT node.nid, node.title, field_label_value AS label," .
           " track.status, track_start, track_end, track_length" .
@@ -154,6 +171,23 @@ function metakinisi_node_view($node, $view_mode, $langcode) {
         //'#theme' => 'mymodule_my_additional_field',
       );
     }
+    if ( $t ) {
+      $passes = metakinisi_passes($node);
+      $rows = array();
+      $headers = array( '', t('Stop'), t('Time'));
+      $time0 = NULL;
+      foreach( $passes as $pass ) {
+        if ( ! $time0 ) {
+          $time0 = $pass->time;
+        }
+        $rows[] = array( $pass->seq, $pass->name,
+            _metakinisi_format_duration($pass->time-$time0));
+      }
+      $node->content['passes'] = array(
+        '#markup' => theme('table', array( 'rows' => $rows, 'header' => $headers)),
+        '#weight' => 13,
+      );      
+    }
   }
 }
 
@@ -162,9 +196,12 @@ function metakinisi_node_view($node, $view_mode, $langcode) {
  */
 function metakinisi_node_update($node) {
   if ($node->type == 'track' ) {
-    $q = db_delete('metakinisi_track');
-    $q->condition( 'nid', $node->nid );
-    $q->execute();
+    db_query("DELETE pass FROM {metakinisi_pass} AS pass" .
+            " JOIN {metakinisi_track} AS track ON pass.tid = track.tid WHERE track.nid = ?",
+            array($node->nid));
+    $q = db_delete('metakinisi_track')->
+      condition( 'nid', $node->nid )->
+      execute();
   }
 }
 
