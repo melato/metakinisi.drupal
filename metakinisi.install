@@ -75,6 +75,11 @@ function metakinisi_schema() {
         'not null' => TRUE,
         'description' => t('Timestamp.'),
       ),
+      'distance' => array(
+        'type' => 'float',
+        'not null' => TRUE,
+        'description' => t('Distance Traveled.'),
+      ),
      ),
     'primary key' => array('pid'),
     'indexes' => array(

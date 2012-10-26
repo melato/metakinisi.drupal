@@ -48,7 +48,7 @@ function metakinisi_track($node) {
 }
 
 function metakinisi_passes($node) {
-  $sql = "SELECT stop.seq, marker.name, pass_time AS time" .
+  $sql = "SELECT stop.seq, marker.name, pass_time AS time, distance" .
           " FROM {metakinisi_pass} AS pass" .
           " JOIN {metakinisi_stop} AS stop ON pass.sid = stop.sid" .
           " JOIN {metakinisi_marker} AS marker ON marker.mid = stop.mid" .
@@ -174,14 +174,23 @@ function metakinisi_node_view($node, $view_mode, $langcode) {
     if ( $t ) {
       $passes = metakinisi_passes($node);
       $rows = array();
-      $headers = array( '', t('Stop'), t('Time'));
+      $headers = array( '', t('Stop'), t('Distance'), t('Time'), t('Speed'));
       $time0 = NULL;
       foreach( $passes as $pass ) {
         if ( ! $time0 ) {
           $time0 = $pass->time;
         }
+        $time = $pass->time - $time0;
+        $speed = 0;
+        if ( $time ) {
+          $speed = $pass->distance / $time * 3600 / 1000;
+        }
+
         $rows[] = array( $pass->seq, $pass->name,
-            _metakinisi_format_duration($pass->time-$time0));
+            _metakinisi_format_length($pass->distance),
+            _metakinisi_format_duration($time),
+            sprintf( "%0.0f Km/h", $speed),
+            );
       }
       $node->content['passes'] = array(
         '#markup' => theme('table', array( 'rows' => $rows, 'header' => $headers)),
