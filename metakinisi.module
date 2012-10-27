@@ -79,7 +79,6 @@ function metakinisi_tracks($uid) {
           " ORDER BY COALESCE( track_start, node.created ) DESC";
   $q = db_query($sql);
   $list = array();
-  Log::info('result', $q);
   foreach ($q as $t) {
     $list[] = $t;    
   }
@@ -140,13 +139,14 @@ function _metakinisi_computed_values($t) {
     $weekday = '';
     $duration = '';
     $length = '';
+    $speed = '';
     if ( $t && $t->track_start != 0 ) {
       $date = date( 'd-m-Y', $t->track_start);
       $time = date( 'H:i', $t->track_start);
       $weekday = _metakinisi_weekday($t->track_start);
       $duration = _metakinisi_format_duration($t->track_duration);
       $length = _metakinisi_format_length($t->track_length);
-      $speed = _metakinisi_format_length($t->track_length, $t->track_duration);
+      $speed = _metakinisi_format_speed($t->track_length, $t->track_duration);
     }
     return array($date, $weekday, $time, $duration, $length, $speed);
 }
