@@ -270,6 +270,7 @@ function metakinisi_map_transfer($node, $file) {
     }
     fclose($fd);
   }
+  drupal_exit();
 }
 
 function metakinisi_map($node) {
