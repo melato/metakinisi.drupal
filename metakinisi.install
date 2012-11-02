@@ -144,7 +144,12 @@ function metakinisi_schema() {
         'not null' => TRUE,
         'description' => t("The sequence #."),
       ),
-     ),
+      'duration' => array(
+        'type' => 'int',
+        'not null' => FALSE,
+        'description' => t('Duration (Seconds).'),
+      ),
+    ),
     'primary key' => array('sid'),      
     'indexes' => array(
     	'metakinisi_stop_rid_idx' => array('rid'),
