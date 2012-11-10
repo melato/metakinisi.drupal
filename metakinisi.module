@@ -287,3 +287,101 @@ function metakinisi_map($node) {
   }
   drupal_access_denied();
 }
+
+/**
+ * Implementation of hook_block_info().
+ */
+function metakinisi_block_info() {
+  $blocks = array();
+  $blocks['status'] = array(
+    'info'       => t('Trip Statistics'),
+    'cache'      => 'BLOCK_CACHE_GLOBAL',
+  );
+  return $blocks;
+}
+
+/**
+ * Implementation of hook_block_info().
+ */
+function metakinisi_block_view($delta) {
+  $block = array();
+  switch ($delta) {
+    case 'status':
+      $block['subject'] = t('Trip Statistics');
+      $block['content'] = metakinisi_statistics();
+      break;
+  }
+  return $block;
+}
+
+function _metakinisi_schema() {
+  static $schema;
+  if ( ! $schema ) {
+    $schema = new stdClass();
+    $schema->routeContentType = 'route';
+    $schema->nameField = 'field_name';
+    $schema->directionField = 'field_direction';
+    $schema->trackContentType = 'track';
+    $schema->gpxField = 'field_gpx';
+    $schema->routeField = 'field_route';  
+  }
+  return $schema;
+}
+
+function _metakinisi_count($sql, $args = array()) {
+  Log::info('args', $args);
+  $q = db_query($sql, $args);
+  foreach ($q as $t) {
+    return $t->count;
+  }  
+}
+
+function metakinisi_statistics_compute() {
+  $schema = _metakinisi_schema();
+  $vars = array();
+  $sql = "SELECT COUNT(*) AS count from {metakinisi_track} WHERE status = 1";
+  $vars['trips'] = _metakinisi_count($sql);
+  
+  $sql = 'SELECT COUNT(DISTINCT sid) AS count FROM {metakinisi_pass}';
+  $vars['trip.stops'] = _metakinisi_count($sql);
+  
+  $sql ='SELECT COUNT(DISTINCT sid) AS count FROM {metakinisi_stop}';
+  $vars['total.stops'] = _metakinisi_count($sql);
+
+  $sql = "SELECT COUNT(DISTINCT route_id) AS count from {metakinisi_track}";
+  $vars['trip.routes'] = _metakinisi_count($sql);
+  
+  $sql = 'SELECT COUNT(*) AS count FROM {node} WHERE status = 1 AND type=?';
+  $vars['total.routes'] = _metakinisi_count($sql, array($schema->routeContentType));
+  return $vars;
+}
+
+function _metakinisi_replace_all( $template, $map) {
+    foreach( $map as $variable => $replacement ) {
+        $template = preg_replace( '#%' . $variable . '%#', $replacement, $template);
+    }
+    return $template;
+}
+
+function _metakinisi_stat($label, $v, $total = NULL) {
+  $value = $v;
+  if ( $total ) {
+    $percent = (int) ($v * 100 / $total);
+    $value = "$v ($percent%)";
+  }
+  return _metakinisi_row($label, $value);
+}
+  
+function metakinisi_statistics() {
+  $vars = metakinisi_statistics_compute();
+  if (!$vars) {
+    return FALSE;
+  }
+  //$template = 'trips=%trips% stops=%trip.stops%';
+  //return _metakinisi_replace_all( $template, $vars );
+  $rows = array();
+  $rows[] = _metakinisi_stat(t('Trips'), $vars['trips']);
+  $rows[] = _metakinisi_stat(t('Stops'), $vars['trip.stops'], $vars['total.stops']);
+  $rows[] = _metakinisi_stat(t('Routes'), $vars['trip.routes'], $vars['total.routes']);
+  return theme('table', array( 'rows' => $rows)); 
+}

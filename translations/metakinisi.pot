@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2012-11-10 09:22+0200\n"
+"POT-Creation-Date: 2012-11-10 15:20+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -121,8 +121,20 @@ msgstr ""
 msgid "Map is not available"
 msgstr ""
 
-#: metakinisi.module:9
+#: metakinisi.module:297;310
+msgid "Trip Statistics"
+msgstr ""
+
+#: metakinisi.module:383;9
 msgid "Trips"
+msgstr ""
+
+#: metakinisi.module:384
+msgid "Stops"
+msgstr ""
+
+#: metakinisi.module:385
+msgid "Routes"
 msgstr ""
 
 #: metakinisi.module:13
