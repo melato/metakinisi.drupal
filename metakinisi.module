@@ -329,7 +329,6 @@ function _metakinisi_schema() {
 }
 
 function _metakinisi_count($sql, $args = array()) {
-  Log::info('args', $args);
   $q = db_query($sql, $args);
   foreach ($q as $t) {
     return $t->count;
