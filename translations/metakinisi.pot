@@ -1,0 +1,255 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  metakinisi.admin.inc: n/a
+#  metakinisi.module: n/a
+#  metakinisi.info: n/a
+#  metakinisi.install: n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-11-10 09:22+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: metakinisi.admin.inc:13
+msgid "Map Directory"
+msgstr ""
+
+#: metakinisi.admin.inc:16
+msgid "The Directory to store generated maps.  Should not be web-accessible."
+msgstr ""
+
+#: metakinisi.admin.inc:26
+msgid "Directory does not exist: %value."
+msgstr ""
+
+#: metakinisi.module:119
+msgid "Sunday"
+msgstr ""
+
+#: metakinisi.module:120
+msgid "Monday"
+msgstr ""
+
+#: metakinisi.module:121
+msgid "Tuesday"
+msgstr ""
+
+#: metakinisi.module:122
+msgid "Wednesday"
+msgstr ""
+
+#: metakinisi.module:123
+msgid "Thursday"
+msgstr ""
+
+#: metakinisi.module:124
+msgid "Friday"
+msgstr ""
+
+#: metakinisi.module:125
+msgid "Saturday"
+msgstr ""
+
+#: metakinisi.module:133
+msgid "Date"
+msgstr ""
+
+#: metakinisi.module:133
+msgid "Weekday"
+msgstr ""
+
+#: metakinisi.module:133
+msgid "Start"
+msgstr ""
+
+#: metakinisi.module:133
+msgid "Duration"
+msgstr ""
+
+#: metakinisi.module:133
+msgid "Length"
+msgstr ""
+
+#: metakinisi.module:133;185
+msgid "Speed (Km/h)"
+msgstr ""
+
+#: metakinisi.module:137
+msgid "Not computed yet"
+msgstr ""
+
+#: metakinisi.module:166
+msgid "Detected Route"
+msgstr ""
+
+#: metakinisi.module:177
+msgid "map"
+msgstr ""
+
+#: metakinisi.module:185
+msgid "Stop"
+msgstr ""
+
+#: metakinisi.module:185
+msgid "Distance"
+msgstr ""
+
+#: metakinisi.module:185
+msgid "Time"
+msgstr ""
+
+#: metakinisi.module:231
+msgid "Trip"
+msgstr ""
+
+#: metakinisi.module:231
+msgid "Line"
+msgstr ""
+
+#: metakinisi.module:286
+msgid "Map is not available"
+msgstr ""
+
+#: metakinisi.module:9
+msgid "Trips"
+msgstr ""
+
+#: metakinisi.module:13
+msgid "My Trips"
+msgstr ""
+
+#: metakinisi.module:17
+msgid "Map"
+msgstr ""
+
+#: metakinisi.module:21
+msgid "Trip Map"
+msgstr ""
+
+#: metakinisi.module:25 metakinisi.info:0
+msgid "Metakinisi"
+msgstr ""
+
+#: metakinisi.module:26
+msgid "Configure Settings for Metakinisi."
+msgstr ""
+
+#: metakinisi.install:5
+msgid "Stores (gpx) track entries"
+msgstr ""
+
+#: metakinisi.install:10;66
+msgid "Track Id."
+msgstr ""
+
+#: metakinisi.install:15
+msgid "Node Id."
+msgstr ""
+
+#: metakinisi.install:20
+msgid "File Id."
+msgstr ""
+
+#: metakinisi.install:25
+msgid "Parsing Status."
+msgstr ""
+
+#: metakinisi.install:30
+msgid "Route Node Id."
+msgstr ""
+
+#: metakinisi.install:35
+msgid "Start timestamp."
+msgstr ""
+
+#: metakinisi.install:42
+msgid "Track length (km)."
+msgstr ""
+
+#: metakinisi.install:47
+msgid "Duration (s)."
+msgstr ""
+
+#: metakinisi.install:56
+msgid "Stores stop times for a track"
+msgstr ""
+
+#: metakinisi.install:61
+msgid "Pass Id."
+msgstr ""
+
+#: metakinisi.install:71;130
+msgid "Stop Id."
+msgstr ""
+
+#: metakinisi.install:76
+msgid "Timestamp."
+msgstr ""
+
+#: metakinisi.install:81
+msgid "Distance Traveled."
+msgstr ""
+
+#: metakinisi.install:90
+msgid "Stores markers (bus stops) independently of routes"
+msgstr ""
+
+#: metakinisi.install:95
+msgid "Marker Id."
+msgstr ""
+
+#: metakinisi.install:102
+msgid "The marker symbol."
+msgstr ""
+
+#: metakinisi.install:109
+msgid "The marker name."
+msgstr ""
+
+#: metakinisi.install:114
+msgid "Latitude."
+msgstr ""
+
+#: metakinisi.install:119
+msgid "Longitude."
+msgstr ""
+
+#: metakinisi.install:125
+msgid "Stores route stops:  sequences of markers for each route"
+msgstr ""
+
+#: metakinisi.install:135
+msgid "The route node id."
+msgstr ""
+
+#: metakinisi.install:140
+msgid "The marker id."
+msgstr ""
+
+#: metakinisi.install:145
+msgid "The sequence #."
+msgstr ""
+
+#: metakinisi.install:150
+msgid "Duration (Seconds)."
+msgstr ""
+
+#: metakinisi.info:0
+msgid "Maintains and displays track metadata"
+msgstr ""
+
+#: metakinisi.info:0
+msgid "melato.org"
+msgstr ""
+
