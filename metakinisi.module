@@ -1,5 +1,11 @@
 <?php
 
+class Metakinisi {
+  const STATUS_OK = 1;
+  const STATUS_ERROR = 2;
+  const STATUS_NO_DATA = 3;
+};
+
 /**
  * Implementation of hook_menu
  */
@@ -73,11 +79,12 @@ function metakinisi_tracks($uid) {
           " ON field.revision_id = node.vid AND field.entity_type = 'node'" .
           " LEFT JOIN {node} AS route ON route.nid = field_route_target_id" .
           " LEFT JOIN {metakinisi_track} AS track ON node.nid = track.nid" .
-          " JOIN {field_data_field_label} AS label" .
+          " LEFT JOIN {field_data_field_label} AS label" .
           " ON label.revision_id = route.vid AND label.entity_type = 'node'" .
-          " WHERE node.uid = $uid" .
+          " WHERE node.type = ? AND node.uid = ?" .
           " ORDER BY COALESCE( track_start, node.created ) DESC";
-  $q = db_query($sql);
+  $schema = _metakinisi_schema();
+  $q = db_query($sql, array( $schema->trackContentType, $uid ));
   $list = array();
   foreach ($q as $t) {
     $list[] = $t;    
@@ -134,21 +141,34 @@ function _metakinisi_computed_headers() {
 }
 
 function _metakinisi_computed_values($t) {
-    $date = t('Not computed yet');
-    $time = '';
-    $weekday = '';
-    $duration = '';
-    $length = '';
-    $speed = '';
-    if ( $t && $t->track_start != 0 ) {
-      $date = date( 'd-m-Y', $t->track_start);
-      $time = date( 'H:i', $t->track_start);
-      $weekday = _metakinisi_weekday($t->track_start);
-      $duration = _metakinisi_format_duration($t->track_duration);
-      $length = _metakinisi_format_length($t->track_length);
-      $speed = _metakinisi_format_speed($t->track_length, $t->track_duration);
+  $date = NULL;
+  $time = '';
+  $weekday = '';
+  $duration = '';
+  $length = '';
+  $speed = '';
+  if ( $t && $t->track_start != 0 ) {
+    $date = date( 'd-m-Y', $t->track_start);
+    $time = date( 'H:i', $t->track_start);
+    $weekday = _metakinisi_weekday($t->track_start);
+    $duration = _metakinisi_format_duration($t->track_duration);
+    $length = _metakinisi_format_length($t->track_length);
+    $speed = _metakinisi_format_speed($t->track_length, $t->track_duration);
+  }
+  if ( ! $date ) {
+    switch( $t->status ) {
+      case Metakinisi::STATUS_ERROR:
+        $date = t('Error');
+        break;
+      case Metakinisi::STATUS_NO_DATA:
+        $date = t('No Data');
+        break;
+      default:
+        $date = t('Not computed yet');
+        break;
     }
-    return array($date, $weekday, $time, $duration, $length, $speed);
+  }
+  return array($date, $weekday, $time, $duration, $length, $speed);
 }
 
 function _metakinisi_row($label, $value) {
@@ -226,6 +246,8 @@ function metakinisi_node_update($node) {
   }
 }
 
+/** The Trips page for the current user.
+ */
 function metakinisi_trips() {
   global $user;  
   $headers = array( t('Trip'), t('Line'));
@@ -295,7 +317,7 @@ function metakinisi_block_info() {
   $blocks = array();
   $blocks['status'] = array(
     'info'       => t('Trip Statistics'),
-    'cache'      => 'BLOCK_CACHE_GLOBAL',
+    'cache'      => DRUPAL_CACHE_GLOBAL,
   );
   return $blocks;
 }
@@ -380,7 +402,7 @@ function metakinisi_statistics() {
   //return _metakinisi_replace_all( $template, $vars );
   $rows = array();
   $rows[] = _metakinisi_stat(t('Trips'), $vars['trips']);
-  $rows[] = _metakinisi_stat(t('Stops'), $vars['trip.stops'], $vars['total.stops']);
   $rows[] = _metakinisi_stat(t('Routes'), $vars['trip.routes'], $vars['total.routes']);
+  $rows[] = _metakinisi_stat(t('Stops'), $vars['trip.stops'], $vars['total.stops']);
   return theme('table', array( 'rows' => $rows)); 
 }
