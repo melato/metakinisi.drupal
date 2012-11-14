@@ -101,14 +101,18 @@ function metakinisi_tracks($uid) {
 }
 
 function metakinisi_route_statistics() {
-  $sql = "SELECT field_label_value AS label, marker.name AS start_name," .
+  $sql = "SELECT field_label_value AS label," .
+          " first_marker.name AS first_name," .
+          " last_marker.name AS last_name," .
           " stats.tracks, stats.stops, stats.passes, stats.unique_passes" .
           " FROM {metakinisi_route_statistics} AS stats" .
           " JOIN {node} AS node ON node.nid = stats.rid" .
           " JOIN {field_data_field_label} AS label " .
           " ON label.revision_id = node.vid AND label.entity_type = 'node'" .
-          " JOIN {metakinisi_stop} AS stop ON stop.rid = stats.rid AND stop.seq = 0" .
-          " JOIN {metakinisi_marker} AS marker ON marker.mid = stop.mid" .
+          " JOIN {metakinisi_stop} AS first_stop ON first_stop.sid = stats.first_sid" .
+          " JOIN {metakinisi_marker} AS first_marker ON first_marker.mid = first_stop.mid" .
+          " JOIN {metakinisi_stop} AS last_stop ON last_stop.sid = stats.last_sid" .
+          " JOIN {metakinisi_marker} AS last_marker ON last_marker.mid = last_stop.mid" .
           " WHERE stats.tracks > 0" .
           " ORDER BY field_label_value ASC, stats.unique_passes DESC";
   $q = db_query($sql);
@@ -298,7 +302,7 @@ function metakinisi_trips() {
  */
 function metakinisi_routes() {
   global $user;  
-  $headers = array( t('Line'), t('Starting Stop'), t('Tracks'), t('Tracked Stops'));
+  $headers = array( t('Line'), t('Destination'), t('Tracks'), t('Tracked Stops'));
   //| sid | rid | tracks | stops | passes | unique_passes |
 
   $rows = array();
@@ -307,7 +311,7 @@ function metakinisi_routes() {
     $tracked = 0;
     if ( $t->stops )
       $tracked = (int) ($t->unique_passes * 100 / $t->stops) . '%';
-    $rows[] = array($t->label, $t->start_name, $t->tracks, $tracked );
+    $rows[] = array($t->label, $t->last_name, $t->tracks, $tracked );
   }
   return theme('table', array( 'header' => $headers, 'rows' => $rows));  
 }
