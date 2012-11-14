@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2012-11-10 15:20+0200\n"
+"POT-Creation-Date: 2012-11-14 10:34+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -33,127 +33,135 @@ msgstr ""
 msgid "Directory does not exist: %value."
 msgstr ""
 
-#: metakinisi.module:119
+#: metakinisi.module:126
 msgid "Sunday"
 msgstr ""
 
-#: metakinisi.module:120
+#: metakinisi.module:127
 msgid "Monday"
 msgstr ""
 
-#: metakinisi.module:121
+#: metakinisi.module:128
 msgid "Tuesday"
 msgstr ""
 
-#: metakinisi.module:122
+#: metakinisi.module:129
 msgid "Wednesday"
 msgstr ""
 
-#: metakinisi.module:123
+#: metakinisi.module:130
 msgid "Thursday"
 msgstr ""
 
-#: metakinisi.module:124
+#: metakinisi.module:131
 msgid "Friday"
 msgstr ""
 
-#: metakinisi.module:125
+#: metakinisi.module:132
 msgid "Saturday"
 msgstr ""
 
-#: metakinisi.module:133
+#: metakinisi.module:140
 msgid "Date"
 msgstr ""
 
-#: metakinisi.module:133
+#: metakinisi.module:140
 msgid "Weekday"
 msgstr ""
 
-#: metakinisi.module:133
+#: metakinisi.module:140
 msgid "Start"
 msgstr ""
 
-#: metakinisi.module:133
+#: metakinisi.module:140
 msgid "Duration"
 msgstr ""
 
-#: metakinisi.module:133
+#: metakinisi.module:140
 msgid "Length"
 msgstr ""
 
-#: metakinisi.module:133;185
+#: metakinisi.module:140;205
 msgid "Speed (Km/h)"
 msgstr ""
 
-#: metakinisi.module:137
+#: metakinisi.module:161
+msgid "Error"
+msgstr ""
+
+#: metakinisi.module:164
+msgid "No Data"
+msgstr ""
+
+#: metakinisi.module:167
 msgid "Not computed yet"
 msgstr ""
 
-#: metakinisi.module:166
+#: metakinisi.module:186
 msgid "Detected Route"
 msgstr ""
 
-#: metakinisi.module:177
+#: metakinisi.module:197
 msgid "map"
 msgstr ""
 
-#: metakinisi.module:185
+#: metakinisi.module:205
 msgid "Stop"
 msgstr ""
 
-#: metakinisi.module:185
+#: metakinisi.module:205
 msgid "Distance"
 msgstr ""
 
-#: metakinisi.module:185
+#: metakinisi.module:205
 msgid "Time"
 msgstr ""
 
-#: metakinisi.module:231
+#: metakinisi.module:253
 msgid "Trip"
 msgstr ""
 
-#: metakinisi.module:231
+#: metakinisi.module:253
 msgid "Line"
 msgstr ""
 
-#: metakinisi.module:286
+#: metakinisi.module:308
 msgid "Map is not available"
 msgstr ""
 
-#: metakinisi.module:297;310
+#: metakinisi.module:319;332
 msgid "Trip Statistics"
 msgstr ""
 
-#: metakinisi.module:383;9
+#: metakinisi.module:404;15
 msgid "Trips"
 msgstr ""
 
-#: metakinisi.module:384
-msgid "Stops"
-msgstr ""
-
-#: metakinisi.module:385
+#: metakinisi.module:405
 msgid "Routes"
 msgstr ""
 
-#: metakinisi.module:13
+#: metakinisi.module:406
+msgid "Stops"
+msgstr ""
+
+#: metakinisi.module:19
 msgid "My Trips"
 msgstr ""
 
-#: metakinisi.module:17
+#: metakinisi.module:23
 msgid "Map"
 msgstr ""
 
-#: metakinisi.module:21
+#: metakinisi.module:27
 msgid "Trip Map"
 msgstr ""
 
-#: metakinisi.module:25 metakinisi.info:0
+#: metakinisi.module:31 metakinisi.info:0
 msgid "Metakinisi"
 msgstr ""
 
-#: metakinisi.module:26
+#: metakinisi.module:32
 msgid "Configure Settings for Metakinisi."
 msgstr ""
 
