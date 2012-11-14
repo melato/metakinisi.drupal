@@ -86,6 +86,46 @@ function metakinisi_schema() {
     	'metakinisi_pass_tid_idx' => array('tid'),
      ),
    );
+  $schema['metakinisi_route_statistics'] = array(
+    'description' => t('Route Statistics'),
+    'fields' => array(
+      'sid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => t('Unique Id.'),
+      ),
+      'rid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t("The route node id."),
+      ),
+      'tracks' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t("The number of tracks."),
+      ),
+      'stops' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t("The number of stops."),
+      ),
+      'passes' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t("The number of stops tracked."),
+      ),
+      'unique_passes' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => t("The number of unique stops tracked."),
+      ),
+    ),
+    'primary key' => array('sid'),      
+    'indexes' => array(
+    	'metakinisi_stop_rid_idx' => array('rid'),
+     ),
+   );
+
   $schema['metakinisi_marker'] = array(
     'description' => t('Stores markers (bus stops) independently of routes'),
     'fields' => array(

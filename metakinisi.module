@@ -19,6 +19,14 @@ function metakinisi_menu() {
       'description' => 'My Trips',
       'type' => MENU_NORMAL_ITEM,
   );
+  $items['metakinisi/routes'] = array(
+      'title' => 'Route Statistics',
+      'page callback' => 'metakinisi_routes',
+      'page arguments' => array(),
+      'access arguments' => array('access content'),
+      'description' => 'Statistics about Recorded Trips',
+      'type' => MENU_NORMAL_ITEM,
+  );
   $items['metakinisi/map/%node'] = array(
       'title' => 'Map',
       'page callback' => 'metakinisi_map',
@@ -85,6 +93,22 @@ function metakinisi_tracks($uid) {
           " ORDER BY COALESCE( track_start, node.created ) DESC";
   $schema = _metakinisi_schema();
   $q = db_query($sql, array( $schema->trackContentType, $uid ));
+  $list = array();
+  foreach ($q as $t) {
+    $list[] = $t;    
+  }
+  return $list;
+}
+
+function metakinisi_route_statistics() {
+  $sql = "SELECT field_label_value AS label, stats.tracks, stats.stops, stats.passes, stats.unique_passes" .
+          " FROM {metakinisi_route_statistics} AS stats" .
+          " JOIN {node} AS node ON node.nid = stats.rid" .
+          " JOIN {field_data_field_label} AS label " .
+          " ON label.revision_id = node.vid AND label.entity_type = 'node'" .
+          " WHERE stats.tracks > 0" .
+          " ORDER BY field_label_value ASC";
+  $q = db_query($sql);
   $list = array();
   foreach ($q as $t) {
     $list[] = $t;    
@@ -265,6 +289,21 @@ function metakinisi_trips() {
   }
   return theme('table', array( 'header' => $headers, 'rows' => $rows));
   
+}
+
+/** The Route Statistics page.
+ */
+function metakinisi_routes() {
+  global $user;  
+  $headers = array( t('Line'), t('Tracks'), t('Stops'), t('Stop Encounters'), t('Tracked Stops'));
+  //| sid | rid | tracks | stops | passes | unique_passes |
+
+  $rows = array();
+  $stats = metakinisi_route_statistics();
+  foreach($stats as $t) {
+    $rows[] = array($t->label, $t->tracks, $t->stops, $t->passes, $t->unique_passes);
+  }
+  return theme('table', array( 'header' => $headers, 'rows' => $rows));  
 }
 
 /**
