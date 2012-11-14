@@ -27,6 +27,14 @@ function metakinisi_menu() {
       'description' => 'Statistics about Recorded Trips',
       'type' => MENU_NORMAL_ITEM,
   );
+  $items['metakinisi/route/%node'] = array(
+      'title' => 'Route',
+      'page callback' => 'metakinisi_route',
+      'page arguments' => array(2),
+      'access arguments' => array('access content'),
+      'description' => 'Derived information about one Route',
+      'type' => MENU_NORMAL_ITEM,
+  );
   $items['metakinisi/map/%node'] = array(
       'title' => 'Map',
       'page callback' => 'metakinisi_map',
@@ -101,10 +109,10 @@ function metakinisi_tracks($uid) {
 }
 
 function metakinisi_route_statistics() {
-  $sql = "SELECT field_label_value AS label," .
+  $sql = "SELECT stats.rid, field_label_value AS label," .
           " first_marker.name AS first_name," .
           " last_marker.name AS last_name," .
-          " stats.tracks, stats.stops, stats.passes, stats.unique_passes" .
+          " stats.tracks, stats.stops, stats.passes, stats.unique_passes, stats.speed" .
           " FROM {metakinisi_route_statistics} AS stats" .
           " JOIN {node} AS node ON node.nid = stats.rid" .
           " JOIN {field_data_field_label} AS label " .
@@ -116,6 +124,20 @@ function metakinisi_route_statistics() {
           " WHERE stats.tracks > 0" .
           " ORDER BY field_label_value ASC, stats.unique_passes DESC";
   $q = db_query($sql);
+  $list = array();
+  foreach ($q as $t) {
+    $list[] = $t;    
+  }
+  return $list;
+}
+
+function metakinisi_stops($rid) {
+  $sql = "SELECT stop.sid, stop.seq, stop.duration, stop.deviation, stop.count, marker.name" .
+          " FROM {metakinisi_stop} AS stop" .
+          " JOIN {metakinisi_marker} AS marker ON stop.mid = marker.mid" .
+          " WHERE stop.rid = ?" .
+          " ORDER BY stop.seq ASC";
+  $q = db_query($sql, array($rid));
   $list = array();
   foreach ($q as $t) {
     $list[] = $t;    
@@ -301,8 +323,7 @@ function metakinisi_trips() {
 /** The Route Statistics page.
  */
 function metakinisi_routes() {
-  global $user;  
-  $headers = array( t('Line'), t('Destination'), t('Tracks'), t('Tracked Stops'));
+  $headers = array( t('Line'), t('Origin'), t('Tracks'), t('Tracked Stops'), t('Speed (Km/h)'));
   //| sid | rid | tracks | stops | passes | unique_passes |
 
   $rows = array();
@@ -311,7 +332,24 @@ function metakinisi_routes() {
     $tracked = 0;
     if ( $t->stops )
       $tracked = (int) ($t->unique_passes * 100 / $t->stops) . '%';
-    $rows[] = array($t->label, $t->last_name, $t->tracks, $tracked );
+    $rows[] = array(l($t->label, "metakinisi/route/$t->rid"), $t->first_name, $t->tracks, $tracked,
+        _metakinisi_format_speed($t->speed, 1));
+  }
+  return theme('table', array( 'header' => $headers, 'rows' => $rows));  
+}
+
+/** The Route Info page.
+ */
+function metakinisi_route($node) {
+  $headers = array( t('Sequence'), t('Stop'), t('Time'), t('Duration'), t('Deviation'), t('Count'));
+  //| sid | rid | tracks | stops | passes | unique_passes |
+
+  $stops = metakinisi_stops($node->nid);
+  $time = 0;
+  foreach($stops as $t) {
+    $time += $t->duration;
+    $rows[] = array( $t->seq, $t->name, _metakinisi_format_duration($time),
+        $t->duration, $t->deviation, $t->count);
   }
   return theme('table', array( 'header' => $headers, 'rows' => $rows));  
 }

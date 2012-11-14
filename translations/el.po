@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Metakinisi\n"
-"POT-Creation-Date: 2012-11-14 12:51+0200\n"
-"PO-Revision-Date: 2012-11-14 12:52+0200\n"
+"POT-Creation-Date: 2012-11-15 00:57+0200\n"
+"PO-Revision-Date: 2012-11-15 00:59+0200\n"
 "Last-Translator: Alex Athanasopoulos <filopodaros@gmail.com>\n"
 "Language-Team:  <alex@melato.org>\n"
 "Language: \n"
@@ -35,127 +35,139 @@ msgstr "Φάκελος για χάρτες.  Δεν πρέπει να είναι
 msgid "Directory does not exist: %value."
 msgstr "Ο φάκελος δεν υπάρχει: %value."
 
-#: metakinisi.module:157
+#: metakinisi.module:179
 msgid "Sunday"
 msgstr "Κυριακή"
 
-#: metakinisi.module:158
+#: metakinisi.module:180
 msgid "Monday"
 msgstr "Δευτέρα"
 
-#: metakinisi.module:159
+#: metakinisi.module:181
 msgid "Tuesday"
 msgstr "Τρίτη"
 
-#: metakinisi.module:160
+#: metakinisi.module:182
 msgid "Wednesday"
 msgstr "Τετάρτη"
 
-#: metakinisi.module:161
+#: metakinisi.module:183
 msgid "Thursday"
 msgstr "Πέμπτη"
 
-#: metakinisi.module:162
+#: metakinisi.module:184
 msgid "Friday"
 msgstr "Παρασκευή"
 
-#: metakinisi.module:163
+#: metakinisi.module:185
 msgid "Saturday"
 msgstr "Σάββατο"
 
-#: metakinisi.module:171
+#: metakinisi.module:193
 msgid "Date"
 msgstr "Ημερομηνία"
 
-#: metakinisi.module:171
+#: metakinisi.module:193
 msgid "Weekday"
 msgstr "Ημέρα"
 
-#: metakinisi.module:171
+#: metakinisi.module:193
 msgid "Start"
 msgstr "Αρχή"
 
-#: metakinisi.module:171
+#: metakinisi.module:193;344
 msgid "Duration"
 msgstr "Διάρκεια"
 
-#: metakinisi.module:171
+#: metakinisi.module:193
 msgid "Length"
 msgstr "Μήκος"
 
-#: metakinisi.module:171;236
+#: metakinisi.module:193;258;326
 msgid "Speed (Km/h)"
 msgstr "Ταχύτητα (Χλμ/ώρα)"
 
-#: metakinisi.module:192
+#: metakinisi.module:214
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: metakinisi.module:195
+#: metakinisi.module:217
 msgid "No Data"
 msgstr "Δεν υπάρχουν δεδομένα"
 
-#: metakinisi.module:198
+#: metakinisi.module:220
 msgid "Not computed yet"
 msgstr "Δεν έχει υπολογιστεί ακόμα"
 
-#: metakinisi.module:217
+#: metakinisi.module:239
 msgid "Detected Route"
 msgstr "Ανιχνευμένη Γραμμή"
 
-#: metakinisi.module:228
+#: metakinisi.module:250
 msgid "map"
 msgstr "χάρτης"
 
-#: metakinisi.module:236
+#: metakinisi.module:258;344
 msgid "Stop"
 msgstr "Στάση"
 
-#: metakinisi.module:236
+#: metakinisi.module:258
 msgid "Distance"
 msgstr "Απόσταση"
 
-#: metakinisi.module:236
+#: metakinisi.module:258;344
 msgid "Time"
 msgstr "Ώρα"
 
-#: metakinisi.module:284
+#: metakinisi.module:306
 msgid "Trip"
 msgstr "Διαδρομή"
 
-#: metakinisi.module:284;305
+#: metakinisi.module:306;326
 msgid "Line"
 msgstr "Γραμμή"
 
-#: metakinisi.module:305
-msgid "Destination"
-msgstr "Προορισμός"
+#: metakinisi.module:326
+msgid "Origin"
+msgstr "Προέλευση"
 
-#: metakinisi.module:305
+#: metakinisi.module:326
 msgid "Tracks"
 msgstr "Διαδρομές"
 
-#: metakinisi.module:305
+#: metakinisi.module:326
 msgid "Tracked Stops"
 msgstr "Καταγεγραμμένες στάσεις"
 
-#: metakinisi.module:357
+#: metakinisi.module:344
+msgid "Sequence"
+msgstr "Σειρά"
+
+#: metakinisi.module:344
+msgid "Deviation"
+msgstr "Απόκλιση"
+
+#: metakinisi.module:344
+msgid "Count"
+msgstr "Αριθμός"
+
+#: metakinisi.module:395
 msgid "Map is not available"
 msgstr "Ο χάρτης δεν είναι διαθέσιμος"
 
-#: metakinisi.module:368;381
+#: metakinisi.module:406;419
 msgid "Trip Statistics"
 msgstr "Στατιστικά Διαδρομών"
 
-#: metakinisi.module:453;15
+#: metakinisi.module:491;15
 msgid "Trips"
 msgstr "Διαδρομές"
 
-#: metakinisi.module:454
+#: metakinisi.module:492
 msgid "Routes"
 msgstr "Γραμμές"
 
-#: metakinisi.module:455
+#: metakinisi.module:493
 msgid "Stops"
 msgstr "Στάσεις"
 
@@ -173,19 +185,27 @@ msgid "Statistics about Recorded Trips"
 msgstr "Στατιστικά καταχωρημένων διαδρομών"
 
 #: metakinisi.module:31
+msgid "Route"
+msgstr "Γραμμή"
+
+#: metakinisi.module:35
+msgid "Derived information about one Route"
+msgstr "Υπολογιζόμενα στοιχεία για μια γραμμή"
+
+#: metakinisi.module:39
 msgid "Map"
 msgstr "Χάρτης"
 
-#: metakinisi.module:35
+#: metakinisi.module:43
 msgid "Trip Map"
 msgstr "Χάρτης Διαδρομής"
 
-#: metakinisi.module:39
+#: metakinisi.module:47
 #: metakinisi.info:0
 msgid "Metakinisi"
 msgstr "Μετακίνηση"
 
-#: metakinisi.module:40
+#: metakinisi.module:48
 msgid "Configure Settings for Metakinisi."
 msgstr "Ρυθμίσεις για Μετακίνηση"
 
@@ -233,7 +253,7 @@ msgstr "Stores stop times for a track"
 msgid "Pass Id."
 msgstr "Pass Id."
 
-#: metakinisi.install:71;194
+#: metakinisi.install:71;186
 msgid "Stop Id."
 msgstr "Stop Id."
 
@@ -249,7 +269,7 @@ msgstr "Distance Traveled."
 msgid "Unique Id."
 msgstr "Μοναδικός Κωδικός."
 
-#: metakinisi.install:100;199
+#: metakinisi.install:100;191
 msgid "The route node id."
 msgstr "The route node id."
 
@@ -277,45 +297,57 @@ msgstr "Το sid της πρώτης αφετηρίας."
 msgid "The sid of the last stop."
 msgstr "Το sid του προορισμού."
 
-#: metakinisi.install:154
+#: metakinisi.install:136
+msgid "Average speed (m/s)."
+msgstr "Μέση ταχύτητα (m/s)."
+
+#: metakinisi.install:146
 msgid "Stores markers (bus stops) independently of routes"
 msgstr "Stores markers (bus stops) independently of routes"
 
-#: metakinisi.install:159
+#: metakinisi.install:151
 msgid "Marker Id."
 msgstr "Marker Id."
 
-#: metakinisi.install:166
+#: metakinisi.install:158
 msgid "The marker symbol."
 msgstr "The marker symbol."
 
-#: metakinisi.install:173
+#: metakinisi.install:165
 msgid "The marker name."
 msgstr "The marker name."
 
-#: metakinisi.install:178
+#: metakinisi.install:170
 msgid "Latitude."
 msgstr "Latitude."
 
-#: metakinisi.install:183
+#: metakinisi.install:175
 msgid "Longitude."
 msgstr "Longitude."
 
-#: metakinisi.install:189
+#: metakinisi.install:181
 msgid "Stores route stops:  sequences of markers for each route"
 msgstr "Stores route stops:  sequences of markers for each route"
 
-#: metakinisi.install:204
+#: metakinisi.install:196
 msgid "The marker id."
 msgstr "The marker id."
 
-#: metakinisi.install:209
+#: metakinisi.install:201
 msgid "The sequence #."
 msgstr "The sequence #."
 
-#: metakinisi.install:214
+#: metakinisi.install:207
 msgid "Duration (Seconds)."
 msgstr "Duration (Seconds)."
+
+#: metakinisi.install:213
+msgid "Duration Deviation (Seconds)."
+msgstr "Απόκλιση χρόνου"
+
+#: metakinisi.install:219
+msgid "The # of data points."
+msgstr "Αριθμός μετρήσεων."
 
 #: metakinisi.info:0
 msgid "Maintains and displays track metadata"

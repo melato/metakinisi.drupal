@@ -129,20 +129,12 @@ function metakinisi_schema() {
         'not null' => TRUE,
         'description' => t("The sid of the last stop."),
       ),
-      /*
-      'origin' => array(
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => FALSE,
-        'description' => t("The name of the starting point."),
+      'speed' => array(
+        'type' => 'float',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'description' => t("Average speed (m/s)."),
       ),
-      'destination' => array(
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => FALSE,
-        'description' => t("The name of the destination."),
-      ),
-       */
     ),
     'primary key' => array('sid'),      
     'indexes' => array(
@@ -209,9 +201,22 @@ function metakinisi_schema() {
         'description' => t("The sequence #."),
       ),
       'duration' => array(
-        'type' => 'int',
-        'not null' => FALSE,
+        'type' => 'float',
+        'not null' => TRUE,
+        'default' => 0,
         'description' => t('Duration (Seconds).'),
+      ),
+      'deviation' => array(
+        'type' => 'float',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => t('Duration Deviation (Seconds).'),
+      ),
+      'count' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => t("The # of data points."),
       ),
     ),
     'primary key' => array('sid'),      
