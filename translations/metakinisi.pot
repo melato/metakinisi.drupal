@@ -5,14 +5,14 @@
 # Generated from files:
 #  metakinisi.admin.inc: n/a
 #  metakinisi.module: n/a
-#  metakinisi.info: n/a
 #  metakinisi.install: n/a
+#  metakinisi.info: n/a
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2012-11-14 10:34+0200\n"
+"POT-Creation-Date: 2012-11-14 12:10+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -33,115 +33,127 @@ msgstr ""
 msgid "Directory does not exist: %value."
 msgstr ""
 
-#: metakinisi.module:126
+#: metakinisi.module:153
 msgid "Sunday"
 msgstr ""
 
-#: metakinisi.module:127
+#: metakinisi.module:154
 msgid "Monday"
 msgstr ""
 
-#: metakinisi.module:128
+#: metakinisi.module:155
 msgid "Tuesday"
 msgstr ""
 
-#: metakinisi.module:129
+#: metakinisi.module:156
 msgid "Wednesday"
 msgstr ""
 
-#: metakinisi.module:130
+#: metakinisi.module:157
 msgid "Thursday"
 msgstr ""
 
-#: metakinisi.module:131
+#: metakinisi.module:158
 msgid "Friday"
 msgstr ""
 
-#: metakinisi.module:132
+#: metakinisi.module:159
 msgid "Saturday"
 msgstr ""
 
-#: metakinisi.module:140
+#: metakinisi.module:167
 msgid "Date"
 msgstr ""
 
-#: metakinisi.module:140
+#: metakinisi.module:167
 msgid "Weekday"
 msgstr ""
 
-#: metakinisi.module:140
+#: metakinisi.module:167
 msgid "Start"
 msgstr ""
 
-#: metakinisi.module:140
+#: metakinisi.module:167
 msgid "Duration"
 msgstr ""
 
-#: metakinisi.module:140
+#: metakinisi.module:167
 msgid "Length"
 msgstr ""
 
-#: metakinisi.module:140;205
+#: metakinisi.module:167;232
 msgid "Speed (Km/h)"
 msgstr ""
 
-#: metakinisi.module:161
+#: metakinisi.module:188
 msgid "Error"
 msgstr ""
 
-#: metakinisi.module:164
+#: metakinisi.module:191
 msgid "No Data"
 msgstr ""
 
-#: metakinisi.module:167
+#: metakinisi.module:194
 msgid "Not computed yet"
 msgstr ""
 
-#: metakinisi.module:186
+#: metakinisi.module:213
 msgid "Detected Route"
 msgstr ""
 
-#: metakinisi.module:197
+#: metakinisi.module:224
 msgid "map"
 msgstr ""
 
-#: metakinisi.module:205
+#: metakinisi.module:232
 msgid "Stop"
 msgstr ""
 
-#: metakinisi.module:205
+#: metakinisi.module:232
 msgid "Distance"
 msgstr ""
 
-#: metakinisi.module:205
+#: metakinisi.module:232
 msgid "Time"
 msgstr ""
 
-#: metakinisi.module:253
+#: metakinisi.module:280
 msgid "Trip"
 msgstr ""
 
-#: metakinisi.module:253
+#: metakinisi.module:280;301
 msgid "Line"
 msgstr ""
 
-#: metakinisi.module:308
+#: metakinisi.module:301
+msgid "Starting Stop"
+msgstr ""
+
+#: metakinisi.module:301
+msgid "Tracks"
+msgstr ""
+
+#: metakinisi.module:301
+msgid "Tracked Stops"
+msgstr ""
+
+#: metakinisi.module:353
 msgid "Map is not available"
 msgstr ""
 
-#: metakinisi.module:319;332
+#: metakinisi.module:364;377
 msgid "Trip Statistics"
 msgstr ""
 
-#: metakinisi.module:404;15
+#: metakinisi.module:449;15
 msgid "Trips"
 msgstr ""
 
-#: metakinisi.module:405
+#: metakinisi.module:450
 msgid "Routes"
 msgstr ""
 
-#: metakinisi.module:406
+#: metakinisi.module:451
 msgid "Stops"
 msgstr ""
 
@@ -149,19 +161,27 @@ msgstr ""
 msgid "My Trips"
 msgstr ""
 
-#: metakinisi.module:23
-msgid "Map"
+#: metakinisi.module:23 metakinisi.install:90
+msgid "Route Statistics"
 msgstr ""
 
 #: metakinisi.module:27
+msgid "Statistics about Recorded Trips"
+msgstr ""
+
+#: metakinisi.module:31
+msgid "Map"
+msgstr ""
+
+#: metakinisi.module:35
 msgid "Trip Map"
 msgstr ""
 
-#: metakinisi.module:31 metakinisi.info:0
+#: metakinisi.module:39 metakinisi.info:0
 msgid "Metakinisi"
 msgstr ""
 
-#: metakinisi.module:32
+#: metakinisi.module:40
 msgid "Configure Settings for Metakinisi."
 msgstr ""
 
@@ -209,7 +229,7 @@ msgstr ""
 msgid "Pass Id."
 msgstr ""
 
-#: metakinisi.install:71;130
+#: metakinisi.install:71;170
 msgid "Stop Id."
 msgstr ""
 
@@ -221,47 +241,67 @@ msgstr ""
 msgid "Distance Traveled."
 msgstr ""
 
-#: metakinisi.install:90
-msgid "Stores markers (bus stops) independently of routes"
-msgstr ""
-
 #: metakinisi.install:95
-msgid "Marker Id."
+msgid "Unique Id."
 msgstr ""
 
-#: metakinisi.install:102
-msgid "The marker symbol."
-msgstr ""
-
-#: metakinisi.install:109
-msgid "The marker name."
-msgstr ""
-
-#: metakinisi.install:114
-msgid "Latitude."
-msgstr ""
-
-#: metakinisi.install:119
-msgid "Longitude."
-msgstr ""
-
-#: metakinisi.install:125
-msgid "Stores route stops:  sequences of markers for each route"
-msgstr ""
-
-#: metakinisi.install:135
+#: metakinisi.install:100;175
 msgid "The route node id."
 msgstr ""
 
-#: metakinisi.install:140
+#: metakinisi.install:105
+msgid "The number of tracks."
+msgstr ""
+
+#: metakinisi.install:110
+msgid "The number of stops."
+msgstr ""
+
+#: metakinisi.install:115
+msgid "The number of stops tracked."
+msgstr ""
+
+#: metakinisi.install:120
+msgid "The number of unique stops tracked."
+msgstr ""
+
+#: metakinisi.install:130
+msgid "Stores markers (bus stops) independently of routes"
+msgstr ""
+
+#: metakinisi.install:135
+msgid "Marker Id."
+msgstr ""
+
+#: metakinisi.install:142
+msgid "The marker symbol."
+msgstr ""
+
+#: metakinisi.install:149
+msgid "The marker name."
+msgstr ""
+
+#: metakinisi.install:154
+msgid "Latitude."
+msgstr ""
+
+#: metakinisi.install:159
+msgid "Longitude."
+msgstr ""
+
+#: metakinisi.install:165
+msgid "Stores route stops:  sequences of markers for each route"
+msgstr ""
+
+#: metakinisi.install:180
 msgid "The marker id."
 msgstr ""
 
-#: metakinisi.install:145
+#: metakinisi.install:185
 msgid "The sequence #."
 msgstr ""
 
-#: metakinisi.install:150
+#: metakinisi.install:190
 msgid "Duration (Seconds)."
 msgstr ""
 
