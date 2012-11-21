@@ -209,16 +209,19 @@ function _metakinisi_computed_values($t) {
     $speed = _metakinisi_format_speed($t->track_length, $t->track_duration);
   }
   if ( ! $date ) {
-    switch( $t->status ) {
-      case Metakinisi::STATUS_ERROR:
-        $date = t('Error');
-        break;
-      case Metakinisi::STATUS_NO_DATA:
-        $date = t('No Data');
-        break;
-      default:
-        $date = t('Not computed yet');
-        break;
+    if ( $t ) {
+      switch( $t->status ) {
+        case Metakinisi::STATUS_ERROR:
+          $date = t('Error');
+          break;
+        case Metakinisi::STATUS_NO_DATA:
+          $date = t('No Data');
+          break;
+        default:
+          break;
+      }
+    } else {
+        $date = t('Not computed yet');      
     }
   }
   return array($date, $weekday, $time, $duration, $length, $speed);
