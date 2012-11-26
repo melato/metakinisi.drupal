@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Metakinisi\n"
-"POT-Creation-Date: 2012-11-26 11:01+0200\n"
-"PO-Revision-Date: 2012-11-26 11:02+0200\n"
+"POT-Creation-Date: 2012-11-26 16:49+0200\n"
+"PO-Revision-Date: 2012-11-26 16:52+0200\n"
 "Last-Translator: Alex Athanasopoulos <filopodaros@gmail.com>\n"
 "Language-Team:  <alex@melato.org>\n"
 "Language: \n"
@@ -75,7 +75,7 @@ msgstr "Ημέρα"
 msgid "Start"
 msgstr "Αρχή"
 
-#: metakinisi.module:193;347
+#: metakinisi.module:193
 msgid "Duration"
 msgstr "Διάρκεια"
 
@@ -83,7 +83,7 @@ msgstr "Διάρκεια"
 msgid "Length"
 msgstr "Μήκος"
 
-#: metakinisi.module:193;261;329
+#: metakinisi.module:193;261
 msgid "Speed (Km/h)"
 msgstr "Ταχύτητα (Χλμ/ώρα)"
 
@@ -107,7 +107,7 @@ msgstr "Ανιχνευμένη Γραμμή"
 msgid "map"
 msgstr "χάρτης"
 
-#: metakinisi.module:261;347
+#: metakinisi.module:261;354
 msgid "Stop"
 msgstr "Στάση"
 
@@ -115,7 +115,7 @@ msgstr "Στάση"
 msgid "Distance"
 msgstr "Απόσταση"
 
-#: metakinisi.module:261;347
+#: metakinisi.module:261;354
 msgid "Time"
 msgstr "Ώρα"
 
@@ -136,38 +136,46 @@ msgid "Tracks"
 msgstr "Διαδρομές"
 
 #: metakinisi.module:329
-msgid "Tracked Stops"
-msgstr "Καταγεγραμμένες στάσεις"
+msgid "Tracked Percentage"
+msgstr "Ποσοστό Καταγραφής"
 
-#: metakinisi.module:347
+#: metakinisi.module:329
+msgid "Average Speed (Km/h)"
+msgstr "Μέση ταχύτητα (Χλμ/ώρα)"
+
+#: metakinisi.module:354
 msgid "Sequence"
 msgstr "Σειρά"
 
-#: metakinisi.module:347
-msgid "Deviation"
-msgstr "Απόκλιση"
+#: metakinisi.module:354
+msgid "Average Duration"
+msgstr "Μέση Διάρκεια"
 
-#: metakinisi.module:347
+#: metakinisi.module:354
+msgid "Standard Deviation"
+msgstr "Τυπική Απόκλιση"
+
+#: metakinisi.module:354
 msgid "Measurements"
 msgstr "Αριθμός Μετρήσεων"
 
-#: metakinisi.module:398
+#: metakinisi.module:409
 msgid "Map is not available"
 msgstr "Ο χάρτης δεν είναι διαθέσιμος"
 
-#: metakinisi.module:409;422
+#: metakinisi.module:420;433
 msgid "Trip Statistics"
 msgstr "Στατιστικά Διαδρομών"
 
-#: metakinisi.module:494;15
+#: metakinisi.module:505;15
 msgid "Trips"
 msgstr "Διαδρομές"
 
-#: metakinisi.module:495
+#: metakinisi.module:506
 msgid "Routes"
 msgstr "Γραμμές"
 
-#: metakinisi.module:496
+#: metakinisi.module:507
 msgid "Stops"
 msgstr "Στάσεις"
 
@@ -356,6 +364,9 @@ msgstr "Maintains and displays track metadata"
 #: metakinisi.info:0
 msgid "melato.org"
 msgstr "melato.org"
+
+#~ msgid "Tracked Stops"
+#~ msgstr "Καταγεγραμμένες στάσεις"
 
 #~ msgid "Count"
 #~ msgstr "Αριθμός"

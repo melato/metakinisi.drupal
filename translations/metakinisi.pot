@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2012-11-26 11:01+0200\n"
+"POT-Creation-Date: 2012-11-26 16:49+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: metakinisi.module:193;347
+#: metakinisi.module:193
 msgid "Duration"
 msgstr ""
 
@@ -81,7 +81,7 @@ msgstr ""
 msgid "Length"
 msgstr ""
 
-#: metakinisi.module:193;261;329
+#: metakinisi.module:193;261
 msgid "Speed (Km/h)"
 msgstr ""
 
@@ -105,7 +105,7 @@ msgstr ""
 msgid "map"
 msgstr ""
 
-#: metakinisi.module:261;347
+#: metakinisi.module:261;354
 msgid "Stop"
 msgstr ""
 
@@ -113,7 +113,7 @@ msgstr ""
 msgid "Distance"
 msgstr ""
 
-#: metakinisi.module:261;347
+#: metakinisi.module:261;354
 msgid "Time"
 msgstr ""
 
@@ -134,38 +134,46 @@ msgid "Tracks"
 msgstr ""
 
 #: metakinisi.module:329
-msgid "Tracked Stops"
+msgid "Tracked Percentage"
 msgstr ""
 
-#: metakinisi.module:347
+#: metakinisi.module:329
+msgid "Average Speed (Km/h)"
+msgstr ""
+
+#: metakinisi.module:354
 msgid "Sequence"
 msgstr ""
 
-#: metakinisi.module:347
-msgid "Deviation"
+#: metakinisi.module:354
+msgid "Average Duration"
 msgstr ""
 
-#: metakinisi.module:347
+#: metakinisi.module:354
+msgid "Standard Deviation"
+msgstr ""
+
+#: metakinisi.module:354
 msgid "Measurements"
 msgstr ""
 
-#: metakinisi.module:398
+#: metakinisi.module:409
 msgid "Map is not available"
 msgstr ""
 
-#: metakinisi.module:409;422
+#: metakinisi.module:420;433
 msgid "Trip Statistics"
 msgstr ""
 
-#: metakinisi.module:494;15
+#: metakinisi.module:505;15
 msgid "Trips"
 msgstr ""
 
-#: metakinisi.module:495
+#: metakinisi.module:506
 msgid "Routes"
 msgstr ""
 
-#: metakinisi.module:496
+#: metakinisi.module:507
 msgid "Stops"
 msgstr ""
 

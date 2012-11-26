@@ -326,7 +326,7 @@ function metakinisi_trips() {
 /** The Route Statistics page.
  */
 function metakinisi_routes() {
-  $headers = array( t('Line'), t('Origin'), t('Tracks'), t('Tracked Stops'), t('Speed (Km/h)'));
+  $headers = array( t('Line'), t('Origin'), t('Tracks'), t('Tracked Percentage'), t('Average Speed (Km/h)'));
   //| sid | rid | tracks | stops | passes | unique_passes |
 
   $rows = array();
@@ -341,18 +341,29 @@ function metakinisi_routes() {
   return theme('table', array( 'header' => $headers, 'rows' => $rows));  
 }
 
+function _metakinisi_format_seconds($seconds) {
+  if ( $seconds )
+    return ((int) $seconds) . "''";
+  else
+    return NULL;
+}
 /** The Route Info page.
  */
 function metakinisi_route($node) {
-  $headers = array( t('Sequence'), t('Stop'), t('Time'), t('Duration'), t('Deviation'), t('Measurements'));
+  drupal_set_title($node->title );  
+  $headers = array( t('Sequence'), t('Stop'), t('Time'), t('Average Duration'), t('Standard Deviation'), t('Measurements'));
   //| sid | rid | tracks | stops | passes | unique_passes |
 
   $stops = metakinisi_stops($node->nid);
   $time = 0;
   foreach($stops as $t) {
     $time += $t->duration;
-    $rows[] = array( $t->seq, $t->name, _metakinisi_format_duration($time),
-        $t->duration, $t->deviation, $t->count);
+    $rows[] = array( $t->seq,
+        $t->name,
+        _metakinisi_format_duration($time),
+        _metakinisi_format_seconds($t->duration),
+        _metakinisi_format_seconds($t->deviation),
+        $t->count);
   }
   return theme('table', array( 'header' => $headers, 'rows' => $rows));  
 }
