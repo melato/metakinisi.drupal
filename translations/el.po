@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Metakinisi\n"
-"POT-Creation-Date: 2012-11-15 00:57+0200\n"
-"PO-Revision-Date: 2012-11-15 00:59+0200\n"
+"POT-Creation-Date: 2012-11-26 11:01+0200\n"
+"PO-Revision-Date: 2012-11-26 11:02+0200\n"
 "Last-Translator: Alex Athanasopoulos <filopodaros@gmail.com>\n"
 "Language-Team:  <alex@melato.org>\n"
 "Language: \n"
@@ -75,7 +75,7 @@ msgstr "Ημέρα"
 msgid "Start"
 msgstr "Αρχή"
 
-#: metakinisi.module:193;344
+#: metakinisi.module:193;347
 msgid "Duration"
 msgstr "Διάρκεια"
 
@@ -83,91 +83,91 @@ msgstr "Διάρκεια"
 msgid "Length"
 msgstr "Μήκος"
 
-#: metakinisi.module:193;258;326
+#: metakinisi.module:193;261;329
 msgid "Speed (Km/h)"
 msgstr "Ταχύτητα (Χλμ/ώρα)"
 
-#: metakinisi.module:214
+#: metakinisi.module:215
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: metakinisi.module:217
+#: metakinisi.module:218
 msgid "No Data"
 msgstr "Δεν υπάρχουν δεδομένα"
 
-#: metakinisi.module:220
+#: metakinisi.module:224
 msgid "Not computed yet"
 msgstr "Δεν έχει υπολογιστεί ακόμα"
 
-#: metakinisi.module:239
+#: metakinisi.module:242
 msgid "Detected Route"
 msgstr "Ανιχνευμένη Γραμμή"
 
-#: metakinisi.module:250
+#: metakinisi.module:253
 msgid "map"
 msgstr "χάρτης"
 
-#: metakinisi.module:258;344
+#: metakinisi.module:261;347
 msgid "Stop"
 msgstr "Στάση"
 
-#: metakinisi.module:258
+#: metakinisi.module:261
 msgid "Distance"
 msgstr "Απόσταση"
 
-#: metakinisi.module:258;344
+#: metakinisi.module:261;347
 msgid "Time"
 msgstr "Ώρα"
 
-#: metakinisi.module:306
+#: metakinisi.module:309
 msgid "Trip"
 msgstr "Διαδρομή"
 
-#: metakinisi.module:306;326
+#: metakinisi.module:309;329
 msgid "Line"
 msgstr "Γραμμή"
 
-#: metakinisi.module:326
+#: metakinisi.module:329
 msgid "Origin"
 msgstr "Προέλευση"
 
-#: metakinisi.module:326
+#: metakinisi.module:329
 msgid "Tracks"
 msgstr "Διαδρομές"
 
-#: metakinisi.module:326
+#: metakinisi.module:329
 msgid "Tracked Stops"
 msgstr "Καταγεγραμμένες στάσεις"
 
-#: metakinisi.module:344
+#: metakinisi.module:347
 msgid "Sequence"
 msgstr "Σειρά"
 
-#: metakinisi.module:344
+#: metakinisi.module:347
 msgid "Deviation"
 msgstr "Απόκλιση"
 
-#: metakinisi.module:344
-msgid "Count"
-msgstr "Αριθμός"
+#: metakinisi.module:347
+msgid "Measurements"
+msgstr "Αριθμός Μετρήσεων"
 
-#: metakinisi.module:395
+#: metakinisi.module:398
 msgid "Map is not available"
 msgstr "Ο χάρτης δεν είναι διαθέσιμος"
 
-#: metakinisi.module:406;419
+#: metakinisi.module:409;422
 msgid "Trip Statistics"
 msgstr "Στατιστικά Διαδρομών"
 
-#: metakinisi.module:491;15
+#: metakinisi.module:494;15
 msgid "Trips"
 msgstr "Διαδρομές"
 
-#: metakinisi.module:492
+#: metakinisi.module:495
 msgid "Routes"
 msgstr "Γραμμές"
 
-#: metakinisi.module:493
+#: metakinisi.module:496
 msgid "Stops"
 msgstr "Στάσεις"
 
@@ -356,6 +356,9 @@ msgstr "Maintains and displays track metadata"
 #: metakinisi.info:0
 msgid "melato.org"
 msgstr "melato.org"
+
+#~ msgid "Count"
+#~ msgstr "Αριθμός"
 
 #~ msgid "Starting Stop"
 #~ msgstr "Αφετηρία"

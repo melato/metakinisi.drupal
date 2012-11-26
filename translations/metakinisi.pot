@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2012-11-15 00:57+0200\n"
+"POT-Creation-Date: 2012-11-26 11:01+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: metakinisi.module:193;344
+#: metakinisi.module:193;347
 msgid "Duration"
 msgstr ""
 
@@ -81,91 +81,91 @@ msgstr ""
 msgid "Length"
 msgstr ""
 
-#: metakinisi.module:193;258;326
+#: metakinisi.module:193;261;329
 msgid "Speed (Km/h)"
 msgstr ""
 
-#: metakinisi.module:214
+#: metakinisi.module:215
 msgid "Error"
 msgstr ""
 
-#: metakinisi.module:217
+#: metakinisi.module:218
 msgid "No Data"
 msgstr ""
 
-#: metakinisi.module:220
+#: metakinisi.module:224
 msgid "Not computed yet"
 msgstr ""
 
-#: metakinisi.module:239
+#: metakinisi.module:242
 msgid "Detected Route"
 msgstr ""
 
-#: metakinisi.module:250
+#: metakinisi.module:253
 msgid "map"
 msgstr ""
 
-#: metakinisi.module:258;344
+#: metakinisi.module:261;347
 msgid "Stop"
 msgstr ""
 
-#: metakinisi.module:258
+#: metakinisi.module:261
 msgid "Distance"
 msgstr ""
 
-#: metakinisi.module:258;344
+#: metakinisi.module:261;347
 msgid "Time"
 msgstr ""
 
-#: metakinisi.module:306
+#: metakinisi.module:309
 msgid "Trip"
 msgstr ""
 
-#: metakinisi.module:306;326
+#: metakinisi.module:309;329
 msgid "Line"
 msgstr ""
 
-#: metakinisi.module:326
+#: metakinisi.module:329
 msgid "Origin"
 msgstr ""
 
-#: metakinisi.module:326
+#: metakinisi.module:329
 msgid "Tracks"
 msgstr ""
 
-#: metakinisi.module:326
+#: metakinisi.module:329
 msgid "Tracked Stops"
 msgstr ""
 
-#: metakinisi.module:344
+#: metakinisi.module:347
 msgid "Sequence"
 msgstr ""
 
-#: metakinisi.module:344
+#: metakinisi.module:347
 msgid "Deviation"
 msgstr ""
 
-#: metakinisi.module:344
-msgid "Count"
+#: metakinisi.module:347
+msgid "Measurements"
 msgstr ""
 
-#: metakinisi.module:395
+#: metakinisi.module:398
 msgid "Map is not available"
 msgstr ""
 
-#: metakinisi.module:406;419
+#: metakinisi.module:409;422
 msgid "Trip Statistics"
 msgstr ""
 
-#: metakinisi.module:491;15
+#: metakinisi.module:494;15
 msgid "Trips"
 msgstr ""
 
-#: metakinisi.module:492
+#: metakinisi.module:495
 msgid "Routes"
 msgstr ""
 
-#: metakinisi.module:493
+#: metakinisi.module:496
 msgid "Stops"
 msgstr ""
 

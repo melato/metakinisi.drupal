@@ -344,7 +344,7 @@ function metakinisi_routes() {
 /** The Route Info page.
  */
 function metakinisi_route($node) {
-  $headers = array( t('Sequence'), t('Stop'), t('Time'), t('Duration'), t('Deviation'), t('Count'));
+  $headers = array( t('Sequence'), t('Stop'), t('Time'), t('Duration'), t('Deviation'), t('Measurements'));
   //| sid | rid | tracks | stops | passes | unique_passes |
 
   $stops = metakinisi_stops($node->nid);
