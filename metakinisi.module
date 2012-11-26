@@ -333,8 +333,8 @@ function metakinisi_routes() {
   $stats = metakinisi_route_statistics();
   foreach($stats as $t) {
     $tracked = 0;
-    if ( $t->stops )
-      $tracked = (int) ($t->unique_passes * 100 / $t->stops) . '%';
+    if ( $t->stops > 1 )
+      $tracked = (int) ($t->unique_passes * 100 / ($t->stops -1)) . '%';
     $rows[] = array(l($t->label, "metakinisi/route/$t->rid"), $t->first_name, $t->tracks, $tracked,
         _metakinisi_format_speed($t->speed, 1));
   }
