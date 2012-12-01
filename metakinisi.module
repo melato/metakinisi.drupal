@@ -20,7 +20,7 @@ function metakinisi_menu() {
       'type' => MENU_NORMAL_ITEM,
   );
   $items['metakinisi/routes'] = array(
-      'title' => 'Route Statistics',
+      'title' => 'Timed Routes',
       'page callback' => 'metakinisi_routes',
       'page arguments' => array(),
       'access arguments' => array('access content'),
