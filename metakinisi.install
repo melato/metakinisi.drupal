@@ -1,8 +1,13 @@
 <?php
 
+/**
+ * The schema holds derived data.
+ * It can therefore be removed and reinstalled without loss of original data.
+ * @return array 
+ */
 function metakinisi_schema() {
   $schema['metakinisi_track'] = array(
-    'description' => t('Stores (gpx) track entries'),
+    'description' => t('Stores Summary of processed track'),
     'fields' => array(
       'tid' => array(
         'type' => 'serial',
@@ -200,17 +205,17 @@ function metakinisi_schema() {
         'not null' => TRUE,
         'description' => t("The sequence #."),
       ),
-      'duration' => array(
+      'time_offset' => array(
         'type' => 'float',
         'not null' => TRUE,
         'default' => 0,
-        'description' => t('Duration (Seconds).'),
+        'description' => t('Time from Start (seconds).'),
       ),
       'deviation' => array(
         'type' => 'float',
         'not null' => TRUE,
         'default' => 0,
-        'description' => t('Duration Deviation (Seconds).'),
+        'description' => t('Duration Deviation (seconds).'),
       ),
       'count' => array(
         'type' => 'int',

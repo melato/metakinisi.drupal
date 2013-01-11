@@ -132,7 +132,7 @@ function metakinisi_route_statistics() {
 }
 
 function metakinisi_stops($rid) {
-  $sql = "SELECT stop.sid, stop.seq, stop.duration, stop.deviation, stop.count, marker.name" .
+  $sql = "SELECT stop.sid, stop.seq, stop.time_offset, stop.deviation, stop.count, marker.name" .
           " FROM {metakinisi_stop} AS stop" .
           " JOIN {metakinisi_marker} AS marker ON stop.mid = marker.mid" .
           " WHERE stop.rid = ?" .
@@ -355,15 +355,16 @@ function metakinisi_route($node) {
   //| sid | rid | tracks | stops | passes | unique_passes |
 
   $stops = metakinisi_stops($node->nid);
-  $time = 0;
+  $previous_time = 0;
   foreach($stops as $t) {
-    $time += $t->duration;
+    $time = $t->time_offset;
     $rows[] = array( $t->seq,
         $t->name,
         _metakinisi_format_duration($time),
-        _metakinisi_format_seconds($t->duration),
+        _metakinisi_format_seconds($time - $previous_time),
         _metakinisi_format_seconds($t->deviation),
         $t->count);
+    $previous_time = $time;
   }
   return theme('table', array( 'header' => $headers, 'rows' => $rows));  
 }
