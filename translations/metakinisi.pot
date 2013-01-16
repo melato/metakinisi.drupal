@@ -5,14 +5,14 @@
 # Generated from files:
 #  metakinisi.admin.inc: n/a
 #  metakinisi.module: n/a
-#  metakinisi.install: n/a
 #  metakinisi.info: n/a
+#  metakinisi.install: n/a
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2012-11-26 16:49+0200\n"
+"POT-Creation-Date: 2013-01-16 08:21+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -157,23 +157,23 @@ msgstr ""
 msgid "Measurements"
 msgstr ""
 
-#: metakinisi.module:409
+#: metakinisi.module:410
 msgid "Map is not available"
 msgstr ""
 
-#: metakinisi.module:420;433
+#: metakinisi.module:421;434
 msgid "Trip Statistics"
 msgstr ""
 
-#: metakinisi.module:505;15
+#: metakinisi.module:506;15
 msgid "Trips"
 msgstr ""
 
-#: metakinisi.module:506
+#: metakinisi.module:507
 msgid "Routes"
 msgstr ""
 
-#: metakinisi.module:507
+#: metakinisi.module:508
 msgid "Stops"
 msgstr ""
 
@@ -181,8 +181,8 @@ msgstr ""
 msgid "My Trips"
 msgstr ""
 
-#: metakinisi.module:23 metakinisi.install:90
-msgid "Route Statistics"
+#: metakinisi.module:23
+msgid "Timed Routes"
 msgstr ""
 
 #: metakinisi.module:27
@@ -213,143 +213,147 @@ msgstr ""
 msgid "Configure Settings for Metakinisi."
 msgstr ""
 
-#: metakinisi.install:5
-msgid "Stores (gpx) track entries"
+#: metakinisi.install:10
+msgid "Stores Summary of processed track"
 msgstr ""
 
-#: metakinisi.install:10;66
+#: metakinisi.install:15;71
 msgid "Track Id."
 msgstr ""
 
-#: metakinisi.install:15
+#: metakinisi.install:20
 msgid "Node Id."
 msgstr ""
 
-#: metakinisi.install:20
+#: metakinisi.install:25
 msgid "File Id."
 msgstr ""
 
-#: metakinisi.install:25
+#: metakinisi.install:30
 msgid "Parsing Status."
 msgstr ""
 
-#: metakinisi.install:30
+#: metakinisi.install:35
 msgid "Route Node Id."
 msgstr ""
 
-#: metakinisi.install:35
+#: metakinisi.install:40
 msgid "Start timestamp."
 msgstr ""
 
-#: metakinisi.install:42
+#: metakinisi.install:47
 msgid "Track length (km)."
 msgstr ""
 
-#: metakinisi.install:47
+#: metakinisi.install:52
 msgid "Duration (s)."
 msgstr ""
 
-#: metakinisi.install:56
+#: metakinisi.install:61
 msgid "Stores stop times for a track"
 msgstr ""
 
-#: metakinisi.install:61
+#: metakinisi.install:66
 msgid "Pass Id."
 msgstr ""
 
-#: metakinisi.install:71;186
+#: metakinisi.install:76;191
 msgid "Stop Id."
 msgstr ""
 
-#: metakinisi.install:76
+#: metakinisi.install:81
 msgid "Timestamp."
 msgstr ""
 
-#: metakinisi.install:81
+#: metakinisi.install:86
 msgid "Distance Traveled."
 msgstr ""
 
 #: metakinisi.install:95
+msgid "Route Statistics"
+msgstr ""
+
+#: metakinisi.install:100
 msgid "Unique Id."
 msgstr ""
 
-#: metakinisi.install:100;191
+#: metakinisi.install:105;196
 msgid "The route node id."
 msgstr ""
 
-#: metakinisi.install:105
+#: metakinisi.install:110
 msgid "The number of tracks."
 msgstr ""
 
-#: metakinisi.install:110
+#: metakinisi.install:115
 msgid "The number of stops."
 msgstr ""
 
-#: metakinisi.install:115
+#: metakinisi.install:120
 msgid "The number of stops tracked."
 msgstr ""
 
-#: metakinisi.install:120
+#: metakinisi.install:125
 msgid "The number of unique stops tracked."
 msgstr ""
 
-#: metakinisi.install:125
+#: metakinisi.install:130
 msgid "The sid of the starting stop."
 msgstr ""
 
-#: metakinisi.install:130
+#: metakinisi.install:135
 msgid "The sid of the last stop."
 msgstr ""
 
-#: metakinisi.install:136
+#: metakinisi.install:141
 msgid "Average speed (m/s)."
 msgstr ""
 
-#: metakinisi.install:146
+#: metakinisi.install:151
 msgid "Stores markers (bus stops) independently of routes"
 msgstr ""
 
-#: metakinisi.install:151
+#: metakinisi.install:156
 msgid "Marker Id."
 msgstr ""
 
-#: metakinisi.install:158
+#: metakinisi.install:163
 msgid "The marker symbol."
 msgstr ""
 
-#: metakinisi.install:165
+#: metakinisi.install:170
 msgid "The marker name."
 msgstr ""
 
-#: metakinisi.install:170
+#: metakinisi.install:175
 msgid "Latitude."
 msgstr ""
 
-#: metakinisi.install:175
+#: metakinisi.install:180
 msgid "Longitude."
 msgstr ""
 
-#: metakinisi.install:181
+#: metakinisi.install:186
 msgid "Stores route stops:  sequences of markers for each route"
 msgstr ""
 
-#: metakinisi.install:196
+#: metakinisi.install:201
 msgid "The marker id."
 msgstr ""
 
-#: metakinisi.install:201
+#: metakinisi.install:206
 msgid "The sequence #."
 msgstr ""
 
-#: metakinisi.install:207
-msgid "Duration (Seconds)."
+#: metakinisi.install:212
+msgid "Time from Start (seconds)."
 msgstr ""
 
-#: metakinisi.install:213
-msgid "Duration Deviation (Seconds)."
+#: metakinisi.install:218
+msgid "Duration Deviation (seconds)."
 msgstr ""
 
-#: metakinisi.install:219
+#: metakinisi.install:224
 msgid "The # of data points."
 msgstr ""
 
