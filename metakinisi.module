@@ -121,14 +121,30 @@ function metakinisi_route_statistics() {
           " JOIN {metakinisi_marker} AS first_marker ON first_marker.mid = first_stop.mid" .
           " JOIN {metakinisi_stop} AS last_stop ON last_stop.sid = stats.last_sid" .
           " JOIN {metakinisi_marker} AS last_marker ON last_marker.mid = last_stop.mid" .
-          " WHERE stats.tracks > 0" .
-          " ORDER BY field_label_value ASC, stats.unique_passes DESC";
+          " WHERE stats.tracks > 0";
   $q = db_query($sql);
   $list = array();
   foreach ($q as $t) {
     $list[] = $t;    
   }
+  usort($list, 'metakinisi_route_statistics_sort');
   return $list;
+}
+
+function metakinisi_route_statistics_sort($x1, $x2) {
+  $label1 = $x1->label;
+  $label2 = $x2->label;
+  if ( is_numeric($label1) && is_numeric($label2)) {
+    $len1 = strlen($label1);
+    $len2 = strlen($label2);
+    if ( $len1 != $len2 ) {
+      return $len1 - $len2;
+    }    
+  }
+  $d = strcmp($label1, $label2);
+  if ( $d != 0 )
+    return $d;
+  return $x2->unique_passes - $x1->unique_passes;
 }
 
 function metakinisi_stops($rid) {
