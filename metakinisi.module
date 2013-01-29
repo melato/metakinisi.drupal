@@ -19,6 +19,14 @@ function metakinisi_menu() {
       'description' => 'My Trips',
       'type' => MENU_NORMAL_ITEM,
   );
+  $items['metakinisi/trips/%'] = array(
+      'title' => 'Trips',
+      'page callback' => 'metakinisi_trips',
+      'page arguments' => array(2),
+      'access arguments' => array('access content'),
+      'description' => 'My Trips',
+      'type' => MENU_NORMAL_ITEM,
+  );
   $items['metakinisi/routes'] = array(
       'title' => 'Timed Routes',
       'page callback' => 'metakinisi_routes',
@@ -86,7 +94,15 @@ function metakinisi_passes($node) {
   return $list;
 }
 
-function metakinisi_tracks($uid) {
+function metakinisi_tracks($uid, $from_timestamp, $limit) {
+  $schema = _metakinisi_schema();
+  $args = array( $schema->trackContentType, $uid );
+  $from_clause = FALSE;
+  if ( $from_timestamp ) {
+    $from_clause = " AND track_start < ?";
+    $args[] = $from_timestamp;
+  }
+  $limit_clause = FALSE;
   $sql = "SELECT node.nid, node.title," .
           " field_route_target_id AS field_route, track.route_id, field_label_value AS label," .
           " track.status, track_start, track_duration, track_length" .
@@ -97,10 +113,14 @@ function metakinisi_tracks($uid) {
           " LEFT JOIN {metakinisi_track} AS track ON node.nid = track.nid" .
           " LEFT JOIN {field_data_field_label} AS label" .
           " ON label.revision_id = route.vid AND label.entity_type = 'node'" .
-          " WHERE node.type = ? AND node.uid = ?" .
+          " WHERE node.type = ? AND node.uid = ?" . $from_clause .
           " ORDER BY COALESCE( track_start, node.created ) DESC";
-  $schema = _metakinisi_schema();
-  $q = db_query($sql, array( $schema->trackContentType, $uid ));
+          
+  if ( $limit ) {
+    $q = db_query_range($sql, 0, $limit, $args);
+  } else {
+    $q = db_query($sql, array( $schema->trackContentType, $uid ));
+  }
   $list = array();
   foreach ($q as $t) {
     $list[] = $t;    
@@ -318,14 +338,60 @@ function metakinisi_node_update($node) {
   }
 }
 
+function _metakinisi_timestamp($date) {
+  if ( ! $date )
+    return FALSE;
+  $date = (string) $date;
+  if (strlen($date) < 4 ) {
+    return FALSE;
+  }
+  $year = (int) substr($date, 0, 4);
+  $date = substr($date, 4);
+  $month = 1;
+  $day = 1;
+  $hour = 0;
+  $minute = 0;
+  if ( strlen($date) >= 2) {
+    $month = (int) substr($date, 0, 2);
+    $date = substr($date, 2);
+    if ( strlen($date) >= 2) {
+      $day = (int) substr($date, 0, 2);
+      $date = substr($date, 2);
+      if ( strlen($date) >= 2) {
+        $hour = (int) substr($date, 0, 2);
+        $date = substr($date, 2);
+        if ( strlen($date) >= 2) {
+          $minute = (int) substr($date, 0, 2);
+          $date = substr($date, 2);
+        } else {
+          $hour++;
+        }
+      } else {
+        $day++;
+      }
+    } else {
+      $month++;
+    }
+  } else {
+    $year++;
+  }
+  $time = mktime( $hour, $minute, 0, $month, $day, $year);
+  return $time;
+}
+
+function _metakinisi_timeid($timestamp) {
+  return date( 'YmdHi', $timestamp );  
+}
 /** The Trips page for the current user.
  */
-function metakinisi_trips() {
+function metakinisi_trips($from = NULL) {
   global $user;  
+  $pagesize = 30;
   $headers = array( t('Trip'), t('Line'));
   $headers = array_merge($headers, _metakinisi_computed_headers());
   $rows = array();
-  $tracks = metakinisi_tracks($user->uid);
+  $from_timestamp = _metakinisi_timestamp($from);
+  $tracks = metakinisi_tracks($user->uid, $from_timestamp, $pagesize);
   foreach($tracks as $t) {
     $label = $t->label;
     if ( $t->route_id != $t->field_route) {
@@ -335,7 +401,13 @@ function metakinisi_trips() {
     $row = array_merge( $row, _metakinisi_computed_values($t));
     $rows[] = $row;
   }
-  return theme('table', array( 'header' => $headers, 'rows' => $rows));
+  $next = '';
+  if ( count($tracks) == $pagesize ) {
+    $last = $tracks[$pagesize-1];
+    $lasttime = _metakinisi_timeid($last->track_start);
+    $next = l(t('Older Trips'), "metakinisi/trips/$lasttime");
+  }
+  return theme('table', array( 'header' => $headers, 'rows' => $rows)) . $next;
   
 }
 
