@@ -596,3 +596,13 @@ function metakinisi_statistics() {
   $rows[] = _metakinisi_stat(t('Stops'), $vars['trip.stops'], $vars['total.stops']);
   return theme('table', array( 'rows' => $rows)); 
 }
+
+function metakinisi_node_access($node, $op, $account) {
+  $schema = _metakinisi_schema();
+  if ( $op == 'view' ) {
+    if ( $node->type == $schema->trackContentType && (! $account || $account->uid != $node->uid )) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+  return NODE_ACCESS_IGNORE;
+}
