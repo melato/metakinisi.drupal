@@ -556,11 +556,20 @@ function metakinisi_statistics_compute() {
   $sql = 'SELECT COUNT(DISTINCT sid) AS count FROM {metakinisi_pass}';
   $vars['trip.stops'] = _metakinisi_count($sql);
   
+  $sql = 'SELECT COUNT(*) AS count FROM {metakinisi_stop} WHERE time_offset <> 0';
+  $vars['timed.stops'] = _metakinisi_count($sql);
+
+  $sql = 'SELECT COUNT(*) AS count FROM {metakinisi_stop} WHERE seq = 0';
+  $vars['initial.stops'] = _metakinisi_count($sql);
+
   $sql ='SELECT COUNT(DISTINCT sid) AS count FROM {metakinisi_stop}';
   $vars['total.stops'] = _metakinisi_count($sql);
 
   $sql = "SELECT COUNT(DISTINCT route_id) AS count from {metakinisi_track}";
   $vars['trip.routes'] = _metakinisi_count($sql);
+
+  $sql = "SELECT COUNT(DISTINCT rid) AS count FROM {metakinisi_stop} WHERE time_offset <> 0";
+  $vars['timed.routes'] = _metakinisi_count($sql);
   
   $sql = 'SELECT COUNT(*) AS count FROM {node} WHERE status = 1 AND type=?';
   $vars['total.routes'] = _metakinisi_count($sql, array($schema->routeContentType));
@@ -592,8 +601,9 @@ function metakinisi_statistics() {
   //return _metakinisi_replace_all( $template, $vars );
   $rows = array();
   $rows[] = _metakinisi_stat(t('Trips'), $vars['trips']);
-  $rows[] = _metakinisi_stat(t('Routes'), $vars['trip.routes'], $vars['total.routes']);
-  $rows[] = _metakinisi_stat(t('Stops'), $vars['trip.stops'], $vars['total.stops']);
+  $rows[] = _metakinisi_stat(t('Recorded Routes'), $vars['trip.routes'], $vars['total.routes']);
+  $rows[] = _metakinisi_stat(t('Routes with stop times'), $vars['timed.routes'], $vars['total.routes']);
+  $rows[] = _metakinisi_stat(t('Stops with schedules'), (int) $vars['initial.stops'] + (int) $vars['timed.stops'], $vars['total.stops']);
   return theme('table', array( 'rows' => $rows)); 
 }
 

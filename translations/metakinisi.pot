@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-01-16 08:21+0200\n"
+"POT-Creation-Date: 2013-02-15 10:07+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -33,183 +33,191 @@ msgstr ""
 msgid "Directory does not exist: %value."
 msgstr ""
 
-#: metakinisi.module:179
+#: metakinisi.module:215
 msgid "Sunday"
 msgstr ""
 
-#: metakinisi.module:180
+#: metakinisi.module:216
 msgid "Monday"
 msgstr ""
 
-#: metakinisi.module:181
+#: metakinisi.module:217
 msgid "Tuesday"
 msgstr ""
 
-#: metakinisi.module:182
+#: metakinisi.module:218
 msgid "Wednesday"
 msgstr ""
 
-#: metakinisi.module:183
+#: metakinisi.module:219
 msgid "Thursday"
 msgstr ""
 
-#: metakinisi.module:184
+#: metakinisi.module:220
 msgid "Friday"
 msgstr ""
 
-#: metakinisi.module:185
+#: metakinisi.module:221
 msgid "Saturday"
 msgstr ""
 
-#: metakinisi.module:193
+#: metakinisi.module:229
 msgid "Date"
 msgstr ""
 
-#: metakinisi.module:193
+#: metakinisi.module:229
 msgid "Weekday"
 msgstr ""
 
-#: metakinisi.module:193
+#: metakinisi.module:229
 msgid "Start"
 msgstr ""
 
-#: metakinisi.module:193
+#: metakinisi.module:229
 msgid "Duration"
 msgstr ""
 
-#: metakinisi.module:193
+#: metakinisi.module:229
 msgid "Length"
 msgstr ""
 
-#: metakinisi.module:193;261
+#: metakinisi.module:229;297
 msgid "Speed (Km/h)"
 msgstr ""
 
-#: metakinisi.module:215
+#: metakinisi.module:251
 msgid "Error"
 msgstr ""
 
-#: metakinisi.module:218
+#: metakinisi.module:254
 msgid "No Data"
 msgstr ""
 
-#: metakinisi.module:224
+#: metakinisi.module:260
 msgid "Not computed yet"
 msgstr ""
 
-#: metakinisi.module:242
+#: metakinisi.module:278
 msgid "Detected Route"
 msgstr ""
 
-#: metakinisi.module:253
+#: metakinisi.module:289
 msgid "map"
 msgstr ""
 
-#: metakinisi.module:261;354
+#: metakinisi.module:297;442
 msgid "Stop"
 msgstr ""
 
-#: metakinisi.module:261
+#: metakinisi.module:297
 msgid "Distance"
 msgstr ""
 
-#: metakinisi.module:261;354
+#: metakinisi.module:297;442
 msgid "Time"
 msgstr ""
 
-#: metakinisi.module:309
+#: metakinisi.module:390
 msgid "Trip"
 msgstr ""
 
-#: metakinisi.module:309;329
+#: metakinisi.module:390;417
 msgid "Line"
 msgstr ""
 
-#: metakinisi.module:329
+#: metakinisi.module:408
+msgid "Older Trips"
+msgstr ""
+
+#: metakinisi.module:417
 msgid "Origin"
 msgstr ""
 
-#: metakinisi.module:329
+#: metakinisi.module:417
 msgid "Tracks"
 msgstr ""
 
-#: metakinisi.module:329
+#: metakinisi.module:417
 msgid "Tracked Percentage"
 msgstr ""
 
-#: metakinisi.module:329
+#: metakinisi.module:417
 msgid "Average Speed (Km/h)"
 msgstr ""
 
-#: metakinisi.module:354
+#: metakinisi.module:442
 msgid "Sequence"
 msgstr ""
 
-#: metakinisi.module:354
+#: metakinisi.module:442
 msgid "Average Duration"
 msgstr ""
 
-#: metakinisi.module:354
+#: metakinisi.module:442
 msgid "Standard Deviation"
 msgstr ""
 
-#: metakinisi.module:354
+#: metakinisi.module:442
 msgid "Measurements"
 msgstr ""
 
-#: metakinisi.module:410
+#: metakinisi.module:498
 msgid "Map is not available"
 msgstr ""
 
-#: metakinisi.module:421;434
+#: metakinisi.module:509;522
 msgid "Trip Statistics"
 msgstr ""
 
-#: metakinisi.module:506;15
+#: metakinisi.module:603;15;23
 msgid "Trips"
 msgstr ""
 
-#: metakinisi.module:507
-msgid "Routes"
+#: metakinisi.module:604
+msgid "Recorded Routes"
 msgstr ""
 
-#: metakinisi.module:508
-msgid "Stops"
+#: metakinisi.module:605
+msgid "Routes with stop times"
 msgstr ""
 
-#: metakinisi.module:19
+#: metakinisi.module:606
+msgid "Stops with schedules"
+msgstr ""
+
+#: metakinisi.module:19;27
 msgid "My Trips"
 msgstr ""
 
-#: metakinisi.module:23
+#: metakinisi.module:31
 msgid "Timed Routes"
 msgstr ""
 
-#: metakinisi.module:27
+#: metakinisi.module:35
 msgid "Statistics about Recorded Trips"
 msgstr ""
 
-#: metakinisi.module:31
+#: metakinisi.module:39
 msgid "Route"
 msgstr ""
 
-#: metakinisi.module:35
+#: metakinisi.module:43
 msgid "Derived information about one Route"
 msgstr ""
 
-#: metakinisi.module:39
+#: metakinisi.module:47
 msgid "Map"
 msgstr ""
 
-#: metakinisi.module:43
+#: metakinisi.module:51
 msgid "Trip Map"
 msgstr ""
 
-#: metakinisi.module:47 metakinisi.info:0
+#: metakinisi.module:55 metakinisi.info:0
 msgid "Metakinisi"
 msgstr ""
 
-#: metakinisi.module:48
+#: metakinisi.module:56
 msgid "Configure Settings for Metakinisi."
 msgstr ""
 
