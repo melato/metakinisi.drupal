@@ -27,6 +27,14 @@ function metakinisi_menu() {
       'description' => 'My Trips',
       'type' => MENU_NORMAL_ITEM,
   );
+  $items['metakinisi/userstats/byroute'] = array(
+      'title' => 'Trip Statistics',
+      'page callback' => 'metakinisi_userstats_byroute',
+      'page arguments' => array(2),
+      'access arguments' => array('access content'),
+      'description' => 'Trip statistics for this user.',
+      'type' => MENU_NORMAL_ITEM,
+  );
   $items['metakinisi/routes'] = array(
       'title' => 'Timed Routes',
       'page callback' => 'metakinisi_routes',
@@ -94,7 +102,14 @@ function metakinisi_passes($node) {
   return $list;
 }
 
-function metakinisi_tracks($uid, $from_timestamp, $limit) {
+/** Query to return track data for the list of tracks.
+ *
+ * @param type $uid  The current user id
+ * @param type $from_timestamp (optional) Upper limit unix timestamp of track time.
+ * @param type $limit (optional) The maximum number of items to return.
+ * @return type 
+ */
+function metakinisi_tracks($uid, $from_timestamp = NULL, $limit = NULL) {
   $schema = _metakinisi_schema();
   $args = array( $schema->trackContentType, $uid );
   $from_clause = FALSE;
@@ -121,11 +136,7 @@ function metakinisi_tracks($uid, $from_timestamp, $limit) {
   } else {
     $q = db_query($sql, array( $schema->trackContentType, $uid ));
   }
-  $list = array();
-  foreach ($q as $t) {
-    $list[] = $t;    
-  }
-  return $list;
+  return $q;
 }
 
 function metakinisi_route_statistics() {
@@ -409,6 +420,31 @@ function metakinisi_trips($from = NULL) {
   }
   return theme('table', array( 'header' => $headers, 'rows' => $rows)) . $next;
   
+}
+
+/** Trip statistics page for the current user.
+ */
+function metakinisi_userstats_byroute() {
+  global $user;  
+  $tracks = metakinisi_tracks($user->uid);
+  $counts = array();
+  foreach($tracks as $t) {
+    $label = $t->label;
+    if ( $t->route_id == $t->field_route) {
+      $count = 1;
+      if ( array_key_exists($label, $counts)) {
+        $count += $counts[$label];
+      }
+      $counts[$label] = $count;
+    }
+  }
+  arsort($counts);
+  $headers = array( t('Route'), t('Track Count'));
+  $rows = array();
+  foreach($counts as $label => $count ) {
+    $rows[] = array( $label, $count );
+  }
+  return theme('table', array( 'header' => $headers, 'rows' => $rows));  
 }
 
 /** The Route Statistics page.
